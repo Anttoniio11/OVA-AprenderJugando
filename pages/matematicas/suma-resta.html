@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Suma y Resta con Llevada | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--math-color);margin-bottom:4px;">➕ Suma y Resta con Llevada</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box math">
+    <h3 style="color:var(--math-color);margin-bottom:14px;">📖 Suma y Resta con llevada</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+<div style="background:#F0EDFF;border-radius:14px;padding:14px;">
+<h4 style="color:var(--math-color);margin-bottom:8px;">Suma con llevada ➕</h4>
+<pre style="font-family:Fredoka One,cursive;font-size:1.2rem;color:var(--math-color);">  1
+ 48
++37
+───
+ 85</pre>
+<p style="font-size:.85rem;margin-top:6px;">8+7=15. Escribo 5 y <strong>llevo 1</strong> a las decenas.</p>
+</div>
+<div style="background:#FFF0EF;border-radius:14px;padding:14px;">
+<h4 style="color:var(--primary);margin-bottom:8px;">Resta con llevada ➖</h4>
+<pre style="font-family:Fredoka One,cursive;font-size:1.2rem;color:var(--primary);"> 7 13
+ 83
+-47
+───
+ 36</pre>
+<p style="font-size:.85rem;margin-top:6px;">No puedo restar 7 a 3. <strong>Pido prestado</strong> a las decenas.</p>
+</div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Operaciones con llevada</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuánto es 48 + 37?", opts:["75","85","84","95"], ans:1, exp:"8+7=15 (llevo 1). 1+4+3=8. Resultado: 85."},
+  {q:"¿Cuánto es 83 - 47?", opts:["44","34","36","46"], ans:2, exp:"No puedo restar 7 a 3. Pido prestado: 13-7=6. Luego 7-4=3. Resultado: 36."},
+  {q:"¿Cuánto es 65 + 78?", opts:["133","143","123","153"], ans:1, exp:"5+8=13 (llevo 1). 1+6+7=14. Resultado: 143."},
+  {q:"¿Cuánto es 92 - 58?", opts:["34","44","24","54"], ans:0, exp:"No puedo restar 8 a 2. Pido prestado: 12-8=4. Luego 8-5=3. Resultado: 34."},
+  {q:"¿Cuánto es 156 + 247?", opts:["393","403","413","383"], ans:1, exp:"6+7=13 (llevo 1). 1+5+4=10 (llevo 1). 1+1+2=4. Resultado: 403."},
+  {q:"¿Cuánto es 304 - 128?", opts:["186","176","196","166"], ans:1, exp:"No puedo restar 8 a 4 ni 2 a 0. Pido prestado. Resultado: 176."},
+  {q:"María tiene 73 lápices y regala 38. ¿Cuántos le quedan?", opts:["45","35","25","55"], ans:1, exp:"73-38: No puedo restar 8 a 3. Pido prestado: 13-8=5. Luego 6-3=3. Resultado: 35."},
+  {q:"En el colegio hay 245 estudiantes. Llegan 167 más. ¿Cuántos hay en total?", opts:["402","412","392","422"], ans:1, exp:"5+7=12 (llevo 1). 1+4+6=11 (llevo 1). 1+2+1=4. Resultado: 412."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'sumaResta', 'btn-math', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

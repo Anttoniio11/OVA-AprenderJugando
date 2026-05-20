@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Vertebrados e Invertebrados | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🦁 Vertebrados e Invertebrados</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 Clasificación de animales</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">
+<div style="background:#EAFAF1;border-radius:12px;padding:12px;"><h4 style="color:var(--nat-color);">🦴 Vertebrados</h4><p style="font-size:.85rem;line-height:1.8;">Tienen columna vertebral (esqueleto interno).<br>Grupos: Mamíferos, Aves, Reptiles, Anfibios, Peces.</p></div>
+<div style="background:#FFF0EF;border-radius:12px;padding:12px;"><h4 style="color:var(--primary);">🐛 Invertebrados</h4><p style="font-size:.85rem;line-height:1.8;">NO tienen columna vertebral.<br>Ej: insectos, arañas, caracoles, medusas, lombrices.</p></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+<div style="background:#D5F5E3;border-radius:8px;padding:8px;text-align:center;font-size:.78rem;"><strong>Mamíferos</strong><br>🐘 Tienen pelo, dan leche</div>
+<div style="background:#D5F5E3;border-radius:8px;padding:8px;text-align:center;font-size:.78rem;"><strong>Aves</strong><br>🦅 Tienen plumas, ponen huevos</div>
+<div style="background:#D5F5E3;border-radius:8px;padding:8px;text-align:center;font-size:.78rem;"><strong>Reptiles</strong><br>🦎 Tienen escamas, sangre fría</div>
+<div style="background:#D5F5E3;border-radius:8px;padding:8px;text-align:center;font-size:.78rem;"><strong>Anfibios</strong><br>🐸 Viven en agua y tierra</div>
+<div style="background:#D5F5E3;border-radius:8px;padding:8px;text-align:center;font-size:.78rem;"><strong>Peces</strong><br>🐟 Tienen aletas, viven en agua</div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Vertebrados e Invertebrados</h3>
+    <p class="exercise-subtitle">Clasifica los animales correctamente.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Los perros son vertebrados o invertebrados?", opts:["Invertebrados","Vertebrados","Ninguno de los dos","Depende de la raza"], ans:1, exp:"Los perros son mamíferos vertebrados. Tienen columna vertebral y esqueleto interno."},
+  {q:"¿Las mariposas son vertebradas o invertebradas?", opts:["Vertebradas","Invertebradas","Ambas","Son reptiles"], ans:1, exp:"Las mariposas son insectos → son invertebradas. No tienen columna vertebral."},
+  {q:"¿Qué tienen en común los vertebrados?", opts:["Todos vuelan","Todos tienen columna vertebral","Todos son mamíferos","Todos viven en el agua"], ans:1, exp:"Todos los vertebrados tienen columna vertebral (espina dorsal) y esqueleto interno."},
+  {q:"¿A qué grupo vertebrado pertenece la rana?", opts:["Mamífero","Ave","Reptil","Anfibio"], ans:3, exp:"La rana es un anfibio. Los anfibios pueden vivir tanto en el agua como en la tierra."},
+  {q:"¿Cuál de estos es un animal invertebrado?", opts:["León","Paloma","Araña","Cocodrilo"], ans:2, exp:"La araña es un aracnido → es invertebrada. El león es mamífero, la paloma ave y el cocodrilo reptil."},
+  {q:"¿Qué caracteriza a las aves entre los vertebrados?", opts:["Tienen pelo y dan leche","Tienen plumas y la mayoría vuela","Tienen escamas y sangre fría","Viven solo en el agua"], ans:1, exp:"Las aves se caracterizan por tener plumas y la mayoría puede volar. Todas ponen huevos."},
+  {q:"El tiburón: ¿vertebrado o invertebrado?", opts:["Invertebrado, vive en el mar","Vertebrado, es un pez","Invertebrado, es un insecto marino","Vertebrado, es un mamífero"], ans:1, exp:"El tiburón es un pez vertebrado. Tiene cartílago (un tipo de esqueleto) en lugar de huesos."},
+  {q:"¿Qué diferencia a los mamíferos de los demás vertebrados?", opts:["Tienen plumas","Las hembras dan leche a sus crías","Tienen escamas","Ponen huevos siempre"], ans:1, exp:"Los mamíferos tienen pelo o pelaje y las hembras producen leche para alimentar a sus crías."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'animales', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

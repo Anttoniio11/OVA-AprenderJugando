@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Medio Ambiente | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">♻️ Medio Ambiente</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 Cuidemos el medio ambiente</h3>
+<p style="line-height:1.9;margin-bottom:10px;">El <strong>medio ambiente</strong> es todo lo que nos rodea: el agua, el aire, los suelos, los seres vivos. ¡Es nuestro hogar!</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;">
+<div style="background:#EAFAF1;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">♻️</div><strong style="font-size:.85rem;">Reciclar</strong><p style="font-size:.78rem;">Separar y reutilizar los residuos.</p></div>
+<div style="background:#D5F5E3;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">💧</div><strong style="font-size:.85rem;">Ahorrar agua</strong><p style="font-size:.78rem;">Cerrar el grifo al no usarlo.</p></div>
+<div style="background:#FFFBEE;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🌱</div><strong style="font-size:.85rem;">Plantar árboles</strong><p style="font-size:.78rem;">Dan oxígeno y combaten el calor.</p></div>
+<div style="background:#FDEBD0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🚲</div><strong style="font-size:.85rem;">Transporte limpio</strong><p style="font-size:.78rem;">Bicicleta o caminar reduce contaminación.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Medio Ambiente</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuál de estas acciones ayuda a cuidar el medio ambiente?", opts:["Botar basura en el río","Quemar la basura","Reciclar y separar los residuos","Dejar el agua corriendo"], ans:2, exp:"Reciclar y separar los residuos reduce la contaminación y permite que los materiales sean reutilizados."},
+  {q:"¿Qué es el calentamiento global?", opts:["Que el sol brilla más en verano","El aumento de la temperatura del planeta por gases contaminantes","Solo un problema de los polos","Que hace más calor en Colombia"], ans:1, exp:"El calentamiento global es el aumento de la temperatura promedio de la Tierra causado por los gases de efecto invernadero que producen las industrias y los vehículos."},
+  {q:"¿Por qué es importante no contaminar los ríos?", opts:["Solo por su belleza","Porque son fuente de agua potable y hogar de muchas especies","Solo para pescar","No es tan importante"], ans:1, exp:"Los ríos son fuente de agua potable, hogar de miles de especies y reguladores del clima. Contaminarlos afecta a toda la vida."},
+  {q:"¿Qué significan las 3R del cuidado ambiental?", opts:["Reír, Recordar, Repetir","Reducir, Reutilizar, Reciclar","Respirar, Regar, Rotar","Recoger, Reparar, Reemplazar"], ans:1, exp:"Las 3R son: Reducir (consumir menos), Reutilizar (usar de nuevo) y Reciclar (transformar los residuos). Son estrategias para cuidar el planeta."},
+  {q:"¿Cuál de estos gases contribuye más al efecto invernadero?", opts:["Oxígeno","Dióxido de carbono (CO₂)","Nitrógeno","Helio"], ans:1, exp:"El dióxido de carbono (CO₂) es el principal gas de efecto invernadero. Se produce al quemar combustibles fósiles (gasolina, carbón, gas natural)."},
+  {q:"¿Por qué debemos plantar árboles?", opts:["Solo por decoración","Porque absorben CO₂, producen oxígeno y regulan el clima","Solo para dar sombra","Para vender su madera"], ans:1, exp:"Los árboles absorben CO₂ (gas contaminante), producen oxígeno, regulan el clima, retienen el agua y son hogar de muchas especies."},
+  {q:"¿Qué es la deforestación y cuál es su problema?", opts:["Plantar muchos árboles, lo cual es bueno","Talar árboles sin reemplazarlos, lo cual destruye ecosistemas","Regar los bosques frecuentemente","Proteger los bosques"], ans:1, exp:"La deforestación es talar árboles sin reemplazarlos. Destruye ecosistemas, aumenta el CO₂, reduce la biodiversidad y provoca sequías."},
+  {q:"¿Cómo podemos ahorrar energía en casa?", opts:["Dejar las luces encendidas siempre","Apagar la luz y los aparatos cuando no se usan","Usar más aparatos eléctricos","No importa cuánta usemos"], ans:1, exp:"Apagar las luces y desconectar los aparatos que no se usan es una forma sencilla de ahorrar energía y reducir la huella de carbono."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'medioAmbiente', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

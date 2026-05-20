@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>El Sistema Solar | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🪐 El Sistema Solar</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 El Sistema Solar</h3>
+<p style="line-height:1.9;margin-bottom:10px;">El sistema solar tiene <strong>el Sol en el centro</strong> y 8 planetas que giran a su alrededor.</p>
+<div style="background:#0D1B2A;color:#fff;border-radius:14px;padding:14px;margin-bottom:10px;">
+<p style="font-size:.88rem;text-align:center;line-height:2;">
+☀️ Sol → 🪨 Mercurio → 🌟 Venus → 🌍 Tierra → 🔴 Marte → 🟠 Júpiter → 💛 Saturno → 🔵 Urano → 🌑 Neptuno
+</p>
+</div>
+<div style="font-size:.85rem;line-height:1.9;"><strong>Truco para recordar:</strong> <em>"Mi Vieja Tía María Juega Sobre Una Nube"</em></div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 El Sistema Solar</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué está en el centro del sistema solar?", opts:["La Tierra","La Luna","El Sol","Júpiter"], ans:2, exp:"El Sol está en el centro del sistema solar. Los planetas giran alrededor de él."},
+  {q:"¿Cuántos planetas tiene el sistema solar?", opts:["7 planetas","8 planetas","9 planetas","10 planetas"], ans:1, exp:"El sistema solar tiene 8 planetas. Plutón fue reclasificado como planeta enano en 2006."},
+  {q:"¿Cuál es el planeta más grande del sistema solar?", opts:["Saturno","La Tierra","Júpiter","Neptuno"], ans:2, exp:"Júpiter es el planeta más grande. Caben más de 1300 Tierras dentro de él."},
+  {q:"¿Qué planeta tiene anillos famosos?", opts:["Júpiter","Marte","Saturno","Urano"], ans:2, exp:"Saturno es famoso por sus hermosos anillos, formados de hielo y rocas."},
+  {q:"¿Qué es la Luna respecto a la Tierra?", opts:["Un planeta","Un satélite natural","Una estrella","Un cometa"], ans:1, exp:"La Luna es el satélite natural de la Tierra. Gira alrededor de nuestro planeta."},
+  {q:"¿Cuál es el planeta más cercano al Sol?", opts:["Venus","Marte","La Tierra","Mercurio"], ans:3, exp:"Mercurio es el planeta más cercano al Sol. Por eso tiene temperaturas extremas."},
+  {q:"¿Cuánto tarda la Tierra en dar una vuelta completa al Sol?", opts:["1 mes","365 días (1 año)","24 horas","7 días"], ans:1, exp:"La Tierra tarda 365 días (1 año) en dar una vuelta completa alrededor del Sol."},
+  {q:"¿Qué es una estrella?", opts:["Un planeta frío","Una bola de gas que produce luz y calor","Un satélite natural","Un cometa grande"], ans:1, exp:"Las estrellas son enormes bolas de gas (principalmente hidrógeno) que producen luz y calor por fusión nuclear. El Sol es una estrella."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'sistemaSolar', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

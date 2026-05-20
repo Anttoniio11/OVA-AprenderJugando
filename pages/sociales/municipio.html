@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>El Municipio | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">🏘️ El Municipio</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 El municipio</h3>
+<p style="line-height:1.9;margin-bottom:10px;">Un <strong>municipio</strong> es la unidad básica de organización política y administrativa de Colombia.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">
+<div style="background:#FFFBEE;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.5rem">🏛️</div><strong>Alcaldía</strong><p style="font-size:.8rem;">Gobierno del municipio. El alcalde lo dirige.</p></div>
+<div style="background:#FDEBD0;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.5rem">🏫</div><strong>Colegios</strong><p style="font-size:.8rem;">Educación para los ciudadanos.</p></div>
+<div style="background:#D5F5E3;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.5rem">🏥</div><strong>Hospitales</strong><p style="font-size:.8rem;">Salud para la comunidad.</p></div>
+<div style="background:#D6EAF8;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.5rem">🏞️</div><strong>Parques</strong><p style="font-size:.8rem;">Espacios de recreación.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 El municipio</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Quién gobierna un municipio?", opts:["El presidente","El gobernador","El alcalde","El rector"], ans:2, exp:"El alcalde es el jefe del gobierno municipal. Es elegido por los ciudadanos cada cuatro años."},
+  {q:"¿Qué es un municipio?", opts:["Un barrio de la ciudad","La unidad básica de organización territorial de Colombia","Un departamento","Una vereda"], ans:1, exp:"El municipio es la unidad administrativa más básica de Colombia. Cada municipio tiene su propio gobierno (alcaldía)."},
+  {q:"¿Cuál es un servicio público que ofrece el municipio?", opts:["Programas de televisión","El transporte aéreo internacional","El suministro de agua potable","Los vuelos internacionales"], ans:2, exp:"El municipio ofrece servicios públicos como agua, energía, alcantarillado, educación y salud a sus ciudadanos."},
+  {q:"Popayán es la capital del departamento del Cauca. ¿Qué es Popayán?", opts:["Un departamento","Una región","Un municipio","Una vereda"], ans:2, exp:"Popayán es un municipio que además es capital del departamento del Cauca, en Colombia."},
+  {q:"¿Qué hace el Concejo Municipal?", opts:["Dirige el ejército","Hace las leyes y normas del municipio","Construye las casas","Enseña en los colegios"], ans:1, exp:"El Concejo Municipal es la entidad que crea las normas y leyes del municipio. Sus miembros se llaman concejales."},
+  {q:"¿Cuál de estas es una función del alcalde?", opts:["Gobernar todo el país","Manejar el presupuesto y los servicios del municipio","Dirigir el departamento","Hacer las leyes nacionales"], ans:1, exp:"El alcalde administra los recursos del municipio, los servicios públicos y vela por el bienestar de sus habitantes."},
+  {q:"¿Qué es una vereda?", opts:["Una calle de la ciudad","Una división rural del municipio","Un tipo de municipio","Una región de Colombia"], ans:1, exp:"La vereda es una división rural del municipio. Son comunidades pequeñas ubicadas en el campo."},
+  {q:"¿Quién elige al alcalde?", opts:["El presidente lo nombra","El gobernador lo elige","Los ciudadanos del municipio lo votan","Los concejales lo eligen"], ans:2, exp:"El alcalde es elegido por voto popular. Los ciudadanos del municipio votan cada cuatro años."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'municipio', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

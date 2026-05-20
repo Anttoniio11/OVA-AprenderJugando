@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Los Ecosistemas | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🌲 Los Ecosistemas</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 ¿Qué es un ecosistema?</h3>
+<p style="line-height:1.9;margin-bottom:10px;">Un ecosistema es el conjunto de <strong>seres vivos y el ambiente</strong> donde viven, interactuando entre sí.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;">
+<div style="background:#EAFAF1;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🌳</div><strong style="font-size:.85rem;">Selva</strong><p style="font-size:.75rem;">Cálida y húmeda</p></div>
+<div style="background:#FDEBD0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🏜️</div><strong style="font-size:.85rem;">Desierto</strong><p style="font-size:.75rem;">Seco y caluroso</p></div>
+<div style="background:#D6EAF8;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🌊</div><strong style="font-size:.85rem;">Océano</strong><p style="font-size:.75rem;">Gran cuerpo de agua</p></div>
+<div style="background:#EBF5FB;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🏔️</div><strong style="font-size:.85rem;">Montaña</strong><p style="font-size:.75rem;">Alturas y frío</p></div>
+<div style="background:#FDEDEC;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🌾</div><strong style="font-size:.85rem;">Pradera</strong><p style="font-size:.75rem;">Llanos con pasto</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Los Ecosistemas</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué es un ecosistema?", opts:["Solo los animales de un lugar","El conjunto de seres vivos y su ambiente interactuando","Solo las plantas de una región","El clima de un lugar"], ans:1, exp:"Un ecosistema es el conjunto de seres vivos (plantas, animales, etc.) y su ambiente no vivo (agua, suelo, clima), interactuando."},
+  {q:"¿En cuál ecosistema vive el camello?", opts:["Selva tropical","Océano","Desierto","Tundra"], ans:2, exp:"El camello está adaptado al desierto. Su joroba almacena grasa (no agua) para sobrevivir periodos secos."},
+  {q:"¿Qué caracteriza a la selva tropical?", opts:["Es muy seca y fría","Es muy fría y tiene nieve","Es cálida, húmeda y con mucha lluvia","Es seca pero fría"], ans:2, exp:"La selva tropical es cálida (temperatura alta), muy húmeda y recibe abundante lluvia. Es el ecosistema con más biodiversidad."},
+  {q:"¿Qué relación existe entre el león y la cebra en la sabana?", opts:["Son amigos","El león es presa de la cebra","El león es depredador y la cebra es su presa","No tienen relación"], ans:2, exp:"El león (depredador) caza a la cebra (presa). Esta relación se llama relación depredador-presa."},
+  {q:"¿Cuál ecosistema tiene menos biodiversidad?", opts:["La selva","El desierto","El océano","La selva tropical"], ans:1, exp:"El desierto tiene poca biodiversidad porque las condiciones extremas (calor, sequía) dificultan la vida."},
+  {q:"¿Qué es una cadena alimenticia?", opts:["Un tipo de ecosistema","La secuencia de quién come a quién en un ecosistema","El camino que recorre el agua","Una lista de animales en peligro"], ans:1, exp:"La cadena alimenticia muestra quién come a quién: plantas → herbívoros → carnívoros."},
+  {q:"¿Por qué es importante conservar los ecosistemas?", opts:["Solo por su belleza","Porque son hogar de especies y regulan el clima","Solo para turismo","No es importante conservarlos"], ans:1, exp:"Los ecosistemas son el hogar de millones de especies, regulan el clima, purifican el agua y el aire. ¡Son vitales para la vida!"},
+  {q:"Colombia tiene el ecosistema de 'páramo'. ¿Qué lo caracteriza?", opts:["Mucho calor y arena","Frío, humedad y altitud alta (sobre 3000m)","Muchos árboles altos y calor","Es un ecosistema marino"], ans:1, exp:"El páramo es un ecosistema de alta montaña (sobre 3000m), con frío, humedad y gran biodiversidad. Colombia tiene los páramos más extensos del mundo."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'ecosistemas', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

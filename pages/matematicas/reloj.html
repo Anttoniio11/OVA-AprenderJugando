@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>El Tiempo y el Reloj | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--math-color);margin-bottom:4px;">🕐 El Tiempo y el Reloj</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box math">
+    <h3 style="color:var(--math-color);margin-bottom:14px;">📖 Leyendo el reloj</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+<div style="background:#F0EDFF;border-radius:14px;padding:14px;">
+<h4 style="color:var(--math-color);margin-bottom:8px;">Las agujas</h4>
+<ul style="padding-left:16px;font-size:.88rem;line-height:2;">
+<li><strong>Horaria (corta):</strong> indica las horas</li>
+<li><strong>Minutera (larga):</strong> indica los minutos</li>
+<li><strong>Segundera:</strong> da vueltas rápido</li>
+</ul>
+</div>
+<div style="background:#FFF0EF;border-radius:14px;padding:14px;">
+<h4 style="color:var(--primary);margin-bottom:8px;">Conversiones clave</h4>
+<ul style="padding-left:16px;font-size:.88rem;line-height:2;">
+<li>1 hora = 60 minutos</li>
+<li>1 minuto = 60 segundos</li>
+<li>1 día = 24 horas</li>
+<li>Media hora = 30 min</li>
+</ul>
+</div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 El tiempo y el reloj</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuántos minutos tiene 1 hora?", opts:["30 minutos","45 minutos","60 minutos","100 minutos"], ans:2, exp:"1 hora = 60 minutos. ¡Es la conversión más importante del tiempo!"},
+  {q:"¿Cuántas horas tiene 1 día?", opts:["12 horas","24 horas","48 horas","60 horas"], ans:1, exp:"Un día completo tiene 24 horas: 12 de mañana + 12 de noche."},
+  {q:"El colegio empieza a las 7:00 y termina a las 12:00. ¿Cuántas horas dura?", opts:["4 horas","5 horas","6 horas","7 horas"], ans:1, exp:"De 7:00 a 12:00 son 5 horas. 12 - 7 = 5."},
+  {q:"Son las 3:30. ¿Qué quiere decir el ':30'?", opts:["30 horas","30 segundos","Media hora (30 minutos)","Un cuarto de hora"], ans:2, exp:"El ':30' significa 30 minutos, que es media hora. Las 3:30 = las 3 y media."},
+  {q:"¿Cuántos segundos tiene 1 minuto?", opts:["30 segundos","45 segundos","60 segundos","100 segundos"], ans:2, exp:"1 minuto = 60 segundos."},
+  {q:"Una película dura 90 minutos. ¿Cuántas horas y minutos son?", opts:["1 hora y 20 min","1 hora y 30 min","2 horas","1 hora y 45 min"], ans:1, exp:"90 minutos = 60 minutos (1 hora) + 30 minutos = 1 hora y 30 minutos."},
+  {q:"¿Qué aguja del reloj es más corta?", opts:["La minutera","La segundera","La horaria","Todas son iguales"], ans:2, exp:"La aguja horaria (que marca las horas) es la más corta."},
+  {q:"La escuela sale a las 12:00. Son las 10:45. ¿Cuánto tiempo falta?", opts:["1 hora 15 min","1 hora 45 min","2 horas","45 minutos"], ans:0, exp:"De 10:45 a 12:00: faltan 15 minutos para las 11, más 1 hora = 1 hora y 15 minutos."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'reloj', 'btn-math', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

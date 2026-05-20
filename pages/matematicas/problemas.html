@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Problemas Matemáticos | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--math-color);margin-bottom:4px;">🧩 Problemas Matemáticos</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box math">
+    <h3 style="color:var(--math-color);margin-bottom:14px;">📖 ¿Cómo resolver un problema?</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+<div style="background:#F0EDFF;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.4rem;">1️⃣</div><strong>Lee bien</strong><p style="font-size:.82rem;margin-top:4px;">Lee el problema 2 veces.</p></div>
+<div style="background:#FFF0EF;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.4rem;">2️⃣</div><strong>¿Qué sé?</strong><p style="font-size:.82rem;margin-top:4px;">Identifica los datos.</p></div>
+<div style="background:#F0FFFE;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.4rem;">3️⃣</div><strong>¿Qué piden?</strong><p style="font-size:.82rem;margin-top:4px;">¿Qué debo encontrar?</p></div>
+<div style="background:#FFFBEE;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.4rem;">4️⃣</div><strong>Opera</strong><p style="font-size:.82rem;margin-top:4px;">Suma, resta, multiplica o divide.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Resuelve los problemas</h3>
+    <p class="exercise-subtitle">Lee bien cada problema y elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"Laura tiene 24 manzanas. Regala 9. ¿Cuántas le quedan?", opts:["13","15","14","16"], ans:1, exp:"24 - 9 = 15. Laura le quedan 15 manzanas."},
+  {q:"En una tienda hay 5 cajas con 12 lápices cada una. ¿Cuántos lápices hay en total?", opts:["17","50","60","55"], ans:2, exp:"5 × 12 = 60. Hay 60 lápices en total."},
+  {q:"El bus tiene 48 pasajeros. En la parada suben 17 más. ¿Cuántos hay ahora?", opts:["55","65","31","75"], ans:1, exp:"48 + 17 = 65. Ahora hay 65 pasajeros."},
+  {q:"Una granja tiene 36 pollos repartidos en 4 jaulas iguales. ¿Cuántos pollos hay en cada jaula?", opts:["8","9","10","12"], ans:1, exp:"36 ÷ 4 = 9. Hay 9 pollos en cada jaula."},
+  {q:"Carlos ahorra $350 pesos el lunes y $280 el martes. ¿Cuánto ahorró en total?", opts:["530","620","630","640"], ans:2, exp:"350 + 280 = 630. Carlos ahorró $630 pesos en total."},
+  {q:"Una caja tiene 144 chocolates. Se reparten entre 12 niños por igual. ¿Cuántos chocolates recibe cada niño?", opts:["10","12","14","16"], ans:1, exp:"144 ÷ 12 = 12. Cada niño recibe 12 chocolates."},
+  {q:"El estadio tiene 500 sillas. 378 están ocupadas. ¿Cuántas están vacías?", opts:["112","122","132","142"], ans:1, exp:"500 - 378 = 122. Hay 122 sillas vacías."},
+  {q:"Ana tiene 3 bolsas con 15 dulces cada una. ¿Cuántos dulces tiene en total?", opts:["35","40","45","50"], ans:2, exp:"3 × 15 = 45. Ana tiene 45 dulces en total."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'problemas', 'btn-math', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

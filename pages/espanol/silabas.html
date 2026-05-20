@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Las Sílabas | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">🔤 Las Sílabas</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 ¿Qué es una sílaba?</h3>
+  <p style="line-height:1.9;">Una <strong>sílaba</strong> es cada "golpecito" de voz al pronunciar una palabra.<br><br>
+  <strong>Truco:</strong> Pon la mano bajo el mentón. Cada vez que baja tu barbilla = una sílaba 👏</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:12px;">
+    <div style="background:#FFF0EF;border-radius:12px;padding:12px;text-align:center;"><strong>Monosílaba</strong><br><small>1 sílaba</small><br><em>sol, pan, luz</em></div>
+    <div style="background:#F0FFFE;border-radius:12px;padding:12px;text-align:center;"><strong>Bisílaba</strong><br><small>2 sílabas</small><br><em>ca-sa, ni-ño</em></div>
+    <div style="background:#F0EDFF;border-radius:12px;padding:12px;text-align:center;"><strong>Trisílaba</strong><br><small>3 sílabas</small><br><em>ca-ba-llo</em></div>
+    <div style="background:#FFFBEE;border-radius:12px;padding:12px;text-align:center;"><strong>Polisílaba</strong><br><small>4 o más</small><br><em>ma-ri-po-sa</em></div>
+  </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Preguntas sobre sílabas</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:"¿Cuántas sílabas tiene 'mariposa'?", opts:["2 sílabas","3 sílabas","4 sílabas","5 sílabas"], ans:2, exp:"ma-ri-po-sa → tiene 4 sílabas. Es una palabra polisílaba."},
+    {q:"¿Cuántas sílabas tiene 'sol'?", opts:["1 sílaba","2 sílabas","3 sílabas","4 sílabas"], ans:0, exp:"'Sol' es monosílaba: tiene 1 solo golpe de voz."},
+    {q:"¿Cómo se separan las sílabas de 'pelota'?", opts:["pe-lo-ta","pel-o-ta","p-e-lo-ta","pelo-ta"], ans:0, exp:"pe-lo-ta tiene 3 sílabas. Se separa así: pe / lo / ta."},
+    {q:"¿Cuántas sílabas tiene 'caballo'?", opts:["2 sílabas","3 sílabas","4 sílabas","1 sílaba"], ans:1, exp:"ca-ba-llo → 3 sílabas. Es una palabra trisílaba."},
+    {q:"¿Qué tipo de palabra es 'árbol'?", opts:["Monosílaba","Bisílaba","Trisílaba","Polisílaba"], ans:1, exp:"Ár-bol → 2 sílabas. Es una palabra bisílaba."},
+    {q:"¿Cuántas sílabas tiene 'elefante'?", opts:["3 sílabas","4 sílabas","5 sílabas","2 sílabas"], ans:1, exp:"e-le-fan-te → 4 sílabas. Es una palabra polisílaba."},
+    {q:"¿Cómo se separan las sílabas de 'escuela'?", opts:["es-cue-la","escu-e-la","e-scue-la","es-cu-e-la"], ans:0, exp:"es-cue-la tiene 3 sílabas: es / cue / la."},
+    {q:"¿Cuántas sílabas tiene 'libro'?", opts:["1 sílaba","2 sílabas","3 sílabas","4 sílabas"], ans:1, exp:"li-bro → 2 sílabas. Es una palabra bisílaba."},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'silabas', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

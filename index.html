@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>AprenderJugando 🌟</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    .welcome-banner {
+      background:linear-gradient(135deg,#FF6B6B,#6C63FF);
+      color:#fff; border-radius:24px; padding:24px 28px;
+      max-width:1200px; margin:20px auto; display:flex;
+      align-items:center; justify-content:space-between; gap:20px;
+      box-shadow:0 8px 32px rgba(108,99,255,.25);
+    }
+    .welcome-banner h2 { font-size:1.4rem; margin-bottom:4px; }
+    .welcome-banner p { opacity:.9; font-size:.95rem; }
+    .overall-progress {
+      max-width:1200px; margin:0 auto; padding:8px 28px;
+      display:flex; gap:16px; flex-wrap:wrap;
+    }
+    .stat-pill {
+      background:#fff; border-radius:50px; padding:8px 20px;
+      box-shadow:0 2px 12px rgba(0,0,0,.08); font-weight:800;
+      font-size:.95rem; display:flex; align-items:center; gap:6px;
+    }
+    @media(max-width:600px){.welcome-banner{flex-direction:column;text-align:center;}.nav-links{display:none;}}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links">
+    <a href="#" onclick="showTab('lang')" id="tab-link-lang">📖 Español</a>
+    <a href="#" onclick="showTab('math')" id="tab-link-math">🔢 Matemáticas</a>
+    <a href="#" onclick="showTab('nat')"  id="tab-link-nat">🌿 Naturales</a>
+    <a href="#" onclick="showTab('soc')"  id="tab-link-soc">🌍 Sociales</a>
+  </div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div style="display:flex;justify-content:center;gap:24px;align-items:flex-end;flex-wrap:wrap;margin-bottom:20px;">
+    <div id="chispa-hero"></div>
+  </div>
+  <h1>¡Bienvenido a AprenderJugando!</h1>
+  <p>Aprende Español, Matemáticas, Ciencias Naturales y Ciencias Sociales de forma divertida 🚀</p>
+</section>
+
+<div class="welcome-banner">
+  <div>
+    <h2>🎯 ¿Cómo funciona?</h2>
+    <p>Elige una materia, aprende con Chispa ⚡ y gana estrellas completando las actividades.</p>
+  </div>
+  <div id="score-pill2" class="score-pill" style="background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.4);">⭐ 0 pts</div>
+</div>
+
+<div class="overall-progress" id="stats-bar"></div>
+
+<!-- TABS -->
+<div class="subject-tabs">
+  <button class="subject-tab lang active" onclick="showTab('lang')">📖 Español</button>
+  <button class="subject-tab math" onclick="showTab('math')">🔢 Matemáticas</button>
+  <button class="subject-tab nat"  onclick="showTab('nat')">🌿 Ciencias Naturales</button>
+  <button class="subject-tab soc"  onclick="showTab('soc')">🌍 Ciencias Sociales</button>
+</div>
+
+<!-- ===== ESPAÑOL ===== -->
+<div class="module-section active" id="sec-lang">
+  <div class="section-title lang">📖 Español y Comunicación</div>
+  <div class="modules-grid">
+    <a href="pages/espanol/silabas.html" class="module-card lang" id="card-silabas">
+      <span class="card-icon">🔤</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Las Sílabas</h3><p>Aprende a separar palabras en sílabas e identificar la sílaba tónica.</p>
+      <div class="card-stars" id="cstars-silabas"></div>
+    </a>
+    <a href="pages/espanol/puntuacion.html" class="module-card lang" id="card-puntuacion">
+      <span class="card-icon">❓</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Signos de Puntuación</h3><p>El punto, la coma y los signos de pregunta y exclamación.</p>
+      <div class="card-stars" id="cstars-puntuacion"></div>
+    </a>
+    <a href="pages/espanol/byv.html" class="module-card lang" id="card-byv">
+      <span class="card-icon">🅱️</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>La B y la V</h3><p>Aprende cuándo usar la B de burro y cuándo la V de vaca.</p>
+      <div class="card-stars" id="cstars-byv"></div>
+    </a>
+    <a href="pages/espanol/syc.html" class="module-card lang" id="card-syc">
+      <span class="card-icon">🐍</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>La S y la C</h3><p>Reglas para escribir correctamente con S o con C.</p>
+      <div class="card-stars" id="cstars-syc"></div>
+    </a>
+    <a href="pages/espanol/letraH.html" class="module-card lang" id="card-letraH">
+      <span class="card-icon">🤫</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>La Letra H Silenciosa</h3><p>La H es silenciosa pero muy importante. ¡Aprende cuándo escribirla!</p>
+      <div class="card-stars" id="cstars-letraH"></div>
+    </a>
+    <a href="pages/espanol/acentos.html" class="module-card lang" id="card-acentos">
+      <span class="card-icon">´</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Acentuación y Tilde</h3><p>Palabras agudas, graves y esdrújulas. ¿Cuándo se escribe la tilde?</p>
+      <div class="card-stars" id="cstars-acentos"></div>
+    </a>
+    <a href="pages/espanol/tipos-texto.html" class="module-card lang" id="card-tiposTexto">
+      <span class="card-icon">📝</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Tipos de Texto</h3><p>El cuento, la carta y la noticia. ¿En qué se diferencian?</p>
+      <div class="card-stars" id="cstars-tiposTexto"></div>
+    </a>
+    <a href="pages/espanol/lectura.html" class="module-card lang" id="card-lectura">
+      <span class="card-icon">📚</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Lectura Comprensiva</h3><p>Estrategias para entender lo que lees. ¡La lectura es un superpoder!</p>
+      <div class="card-stars" id="cstars-lectura"></div>
+    </a>
+  </div>
+</div>
+
+<!-- ===== MATEMÁTICAS ===== -->
+<div class="module-section" id="sec-math">
+  <div class="section-title math">🔢 Matemáticas</div>
+  <div class="modules-grid">
+    <a href="pages/matematicas/silabas.html" class="module-card math" id="card-tablas">
+      <span class="card-icon">✖️</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Tablas de Multiplicar</h3><p>Aprende las tablas del 1 al 10 con juegos y velocidad.</p>
+      <div class="card-stars" id="cstars-tablas"></div>
+    </a>
+    <a href="pages/matematicas/fracciones.html" class="module-card math" id="card-fracciones">
+      <span class="card-icon">🍕</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Fracciones</h3><p>Aprende fracciones con pizzas y frutas. ¡Delicioso aprendizaje!</p>
+      <div class="card-stars" id="cstars-fracciones"></div>
+    </a>
+    <a href="pages/matematicas/geometria.html" class="module-card math" id="card-geometria">
+      <span class="card-icon">🔺</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Figuras Geométricas</h3><p>Triángulos, cuadrados y más. ¡Están en todas partes!</p>
+      <div class="card-stars" id="cstars-geometria"></div>
+    </a>
+    <a href="pages/matematicas/valor-posicional.html" class="module-card math" id="card-valorPosicional">
+      <span class="card-icon">🔢</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Valor Posicional</h3><p>Unidades, decenas y centenas. ¡Cada dígito tiene su lugar!</p>
+      <div class="card-stars" id="cstars-valorPosicional"></div>
+    </a>
+    <a href="pages/matematicas/suma-resta.html" class="module-card math" id="card-sumaResta">
+      <span class="card-icon">➕</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Suma y Resta con Llevada</h3><p>Domina las operaciones básicas paso a paso.</p>
+      <div class="card-stars" id="cstars-sumaResta"></div>
+    </a>
+    <a href="pages/matematicas/problemas.html" class="module-card math" id="card-problemas">
+      <span class="card-icon">🧩</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Problemas Matemáticos</h3><p>Aprende a leer y resolver problemas con enunciado.</p>
+      <div class="card-stars" id="cstars-problemas"></div>
+    </a>
+    <a href="pages/matematicas/medidas.html" class="module-card math" id="card-medidas">
+      <span class="card-icon">📏</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Medidas de Longitud</h3><p>Centímetros, metros y kilómetros. ¡Mide el mundo!</p>
+      <div class="card-stars" id="cstars-medidas"></div>
+    </a>
+    <a href="pages/matematicas/reloj.html" class="module-card math" id="card-reloj">
+      <span class="card-icon">🕐</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>El Tiempo y el Reloj</h3><p>Horas, minutos y el reloj. ¡El tiempo vale oro!</p>
+      <div class="card-stars" id="cstars-reloj"></div>
+    </a>
+  </div>
+</div>
+
+<!-- ===== CIENCIAS NATURALES ===== -->
+<div class="module-section" id="sec-nat">
+  <div class="section-title nat">🌿 Ciencias Naturales</div>
+  <div class="modules-grid">
+    <a href="pages/naturales/ser-vivo.html" class="module-card nat" id="card-serVivo">
+      <span class="card-icon">🦋</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Seres Vivos</h3><p>Características de los seres vivos y diferencias con lo no vivo.</p>
+      <div class="card-stars" id="cstars-serVivo"></div>
+    </a>
+    <a href="pages/naturales/ciclo-agua.html" class="module-card nat" id="card-cicloAgua">
+      <span class="card-icon">💧</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Ciclo del Agua</h3><p>Evaporación, condensación y precipitación. ¡El agua viaja!</p>
+      <div class="card-stars" id="cstars-cicloAgua"></div>
+    </a>
+    <a href="pages/naturales/animales.html" class="module-card nat" id="card-animales">
+      <span class="card-icon">🦁</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Vertebrados e Invertebrados</h3><p>Clasifica los animales según su esqueleto.</p>
+      <div class="card-stars" id="cstars-animales"></div>
+    </a>
+    <a href="pages/naturales/plantas.html" class="module-card nat" id="card-plantas">
+      <span class="card-icon">🌱</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Las Plantas</h3><p>Partes de las plantas y cómo hacen la fotosíntesis.</p>
+      <div class="card-stars" id="cstars-plantas"></div>
+    </a>
+    <a href="pages/naturales/cuerpo-humano.html" class="module-card nat" id="card-cuerpoHumano">
+      <span class="card-icon">🫀</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>El Cuerpo Humano</h3><p>Sistemas del cuerpo: digestivo, respiratorio y circulatorio.</p>
+      <div class="card-stars" id="cstars-cuerpoHumano"></div>
+    </a>
+    <a href="pages/naturales/ecosistemas.html" class="module-card nat" id="card-ecosistemas">
+      <span class="card-icon">🌲</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Ecosistemas</h3><p>Selva, desierto, océano y más. ¡La naturaleza en acción!</p>
+      <div class="card-stars" id="cstars-ecosistemas"></div>
+    </a>
+    <a href="pages/naturales/estados-materia.html" class="module-card nat" id="card-estadosMateria">
+      <span class="card-icon">🧊</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Estados de la Materia</h3><p>Sólido, líquido y gaseoso. ¿En qué estado está el agua?</p>
+      <div class="card-stars" id="cstars-estadosMateria"></div>
+    </a>
+    <a href="pages/naturales/sistema-solar.html" class="module-card nat" id="card-sistemaSolar">
+      <span class="card-icon">🪐</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>El Sistema Solar</h3><p>Los planetas, el sol y la luna. ¡Viaja al espacio!</p>
+      <div class="card-stars" id="cstars-sistemaSolar"></div>
+    </a>
+  </div>
+</div>
+
+<!-- ===== CIENCIAS SOCIALES ===== -->
+<div class="module-section" id="sec-soc">
+  <div class="section-title soc">🌍 Ciencias Sociales</div>
+  <div class="modules-grid">
+    <a href="pages/sociales/familia.html" class="module-card soc" id="card-familia">
+      <span class="card-icon">👨‍👩‍👧‍👦</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>La Familia</h3><p>Tipos de familia, roles y convivencia en el hogar.</p>
+      <div class="card-stars" id="cstars-familia"></div>
+    </a>
+    <a href="pages/sociales/municipio.html" class="module-card soc" id="card-municipio">
+      <span class="card-icon">🏘️</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>El Municipio</h3><p>Partes del municipio, autoridades y servicios públicos.</p>
+      <div class="card-stars" id="cstars-municipio"></div>
+    </a>
+    <a href="pages/sociales/colombia-regiones.html" class="module-card soc" id="card-regiones">
+      <span class="card-icon">🗺️</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Regiones de Colombia</h3><p>Las 6 regiones naturales de Colombia y sus características.</p>
+      <div class="card-stars" id="cstars-regiones"></div>
+    </a>
+    <a href="pages/sociales/derechos.html" class="module-card soc" id="card-derechos">
+      <span class="card-icon">✊</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Derechos y Deberes</h3><p>Derechos de los niños y deberes como ciudadanos.</p>
+      <div class="card-stars" id="cstars-derechos"></div>
+    </a>
+    <a href="pages/sociales/identidad-cultural.html" class="module-card soc" id="card-identidad">
+      <span class="card-icon">🎭</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Identidad Cultural</h3><p>Tradiciones, costumbres y qué nos hace únicos como colombianos.</p>
+      <div class="card-stars" id="cstars-identidad"></div>
+    </a>
+    <a href="pages/sociales/historia-colombia.html" class="module-card soc" id="card-historiaCol">
+      <span class="card-icon">📜</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Historia de Colombia</h3><p>Independencia, héroes y momentos importantes de nuestra historia.</p>
+      <div class="card-stars" id="cstars-historiaCol"></div>
+    </a>
+    <a href="pages/sociales/convivencia.html" class="module-card soc" id="card-convivencia">
+      <span class="card-icon">🤝</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Convivencia y Paz</h3><p>Respeto, solidaridad y resolución de conflictos.</p>
+      <div class="card-stars" id="cstars-convivencia"></div>
+    </a>
+    <a href="pages/sociales/medio-ambiente.html" class="module-card soc" id="card-medioAmbiente">
+      <span class="card-icon">♻️</span><div class="card-badge">Grado 3°-4°</div>
+      <h3>Medio Ambiente</h3><p>Cómo cuidar nuestro planeta. ¡Somos guardianes de la Tierra!</p>
+      <div class="card-stars" id="cstars-medioAmbiente"></div>
+    </a>
+  </div>
+</div>
+
+<script src="js/global.js"></script>
+<script>
+// All module IDs
+const ALL_MODULES = {
+  lang: ['silabas','puntuacion','byv','syc','letraH','acentos','tiposTexto','lectura'],
+  math: ['tablas','fracciones','geometria','valorPosicional','sumaResta','problemas','medidas','reloj'],
+  nat:  ['serVivo','cicloAgua','animales','plantas','cuerpoHumano','ecosistemas','estadosMateria','sistemaSolar'],
+  soc:  ['familia','municipio','regiones','derechos','identidad','historiaCol','convivencia','medioAmbiente']
+};
+
+function showTab(tab) {
+  document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.subject-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + tab).classList.add('active');
+  document.querySelector(`.subject-tab.${tab}`).classList.add('active');
+}
+
+function initHome() {
+  // Chispa hero
+  document.getElementById('chispa-hero').innerHTML = `<div class="chispa-wrap">
+    ${chispaSVG('wow', 110)}
+    <div class="chispa-bubble" style="max-width:300px;">¡Hola! Soy Chispa ⚡<br>¡Elige una materia y comencemos! 🚀</div>
+  </div>`;
+
+  // Stars for all cards
+  Object.values(ALL_MODULES).flat().forEach(id => {
+    const el = document.getElementById('cstars-' + id);
+    if (!el) return;
+    const s = OVA.getStars(id);
+    el.innerHTML = s > 0 ? '⭐'.repeat(s) + '☆'.repeat(3-s) : '☆☆☆';
+    if (s === 3) {
+      const card = el.closest('.module-card');
+      if (card && !card.querySelector('.card-done')) {
+        const done = document.createElement('span');
+        done.className = 'card-done'; done.textContent = '✅';
+        card.appendChild(done);
+      }
+    }
+  });
+
+  // Stats bar
+  const stats = document.getElementById('stats-bar');
+  const subjects = [
+    {key:'lang',label:'📖 Español',color:'var(--lang-color)'},
+    {key:'math',label:'🔢 Matemáticas',color:'var(--math-color)'},
+    {key:'nat', label:'🌿 Naturales',color:'var(--nat-color)'},
+    {key:'soc', label:'🌍 Sociales',color:'var(--soc-dark)'},
+  ];
+  stats.innerHTML = subjects.map(s => {
+    const done = ALL_MODULES[s.key].filter(id => OVA.getStars(id) > 0).length;
+    const total = ALL_MODULES[s.key].length;
+    return `<div class="stat-pill"><span style="color:${s.color}">${s.label}</span> ${done}/${total}</div>`;
+  }).join('');
+
+  // Score pills
+  document.querySelectorAll('.score-pill').forEach(el => el.textContent = '⭐ ' + OVA.score + ' pts');
+}
+
+document.addEventListener('DOMContentLoaded', initHome);
+</script>
+</body>
+</html>

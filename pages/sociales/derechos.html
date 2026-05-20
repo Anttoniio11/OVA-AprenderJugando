@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Derechos y Deberes | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">✊ Derechos y Deberes</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 Derechos y Deberes</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div style="background:#FFFBEE;border-radius:12px;padding:12px;"><h4 style="color:var(--soc-dark);margin-bottom:8px;">✅ Derechos de los niños</h4>
+<ul style="padding-left:16px;font-size:.82rem;line-height:2;">
+<li>Derecho a la educación</li><li>Derecho a la salud</li><li>Derecho a la alimentación</li>
+<li>Derecho a la protección</li><li>Derecho al juego</li><li>Derecho a la identidad</li>
+</ul>
+</div>
+<div style="background:#FDEBD0;border-radius:12px;padding:12px;"><h4 style="color:var(--soc-dark);margin-bottom:8px;">📋 Deberes ciudadanos</h4>
+<ul style="padding-left:16px;font-size:.82rem;line-height:2;">
+<li>Respetar las normas</li><li>Cuidar el medio ambiente</li><li>Estudiar y trabajar</li>
+<li>Respetar a los demás</li><li>Pagar impuestos (adultos)</li>
+</ul>
+</div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Derechos y Deberes</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuál de estos es un derecho fundamental de los niños?", opts:["Trabajar en lugar de estudiar","Derecho a la educación","No obedecer a los adultos","Elegir no ir al médico"], ans:1, exp:"La educación es un derecho fundamental de todos los niños. Ningún niño puede ser excluido de la escuela."},
+  {q:"¿Cuál es un deber de los estudiantes?", opts:["Llegar tarde al colegio","Solo jugar en clase","Estudiar y respetar las normas del colegio","No hacer tareas"], ans:2, exp:"Estudiar con responsabilidad y respetar las normas del colegio son deberes fundamentales de los estudiantes."},
+  {q:"¿Qué organización internacional protege los derechos de los niños?", opts:["La OEA","La UNICEF","La NASA","La FIFA"], ans:1, exp:"UNICEF (Fondo de las Naciones Unidas para la Infancia) trabaja por proteger los derechos de los niños en todo el mundo."},
+  {q:"¿Qué significa 'derecho a la identidad'?", opts:["Poder cambiar de nombre cuando quieran","Tener nombre, apellido, nacionalidad y familia","Solo tener documento de identidad","Poder elegir su identidad cultural"], ans:1, exp:"El derecho a la identidad significa que todo niño tiene derecho a un nombre, apellido, nacionalidad y a conocer y ser cuidado por su familia."},
+  {q:"¿Cuál es un deber ciudadano relacionado con el ambiente?", opts:["Botar basura en la calle","Cuidar y no contaminar el medio ambiente","Usar mucha agua","Talar árboles"], ans:1, exp:"Cuidar el medio ambiente es un deber de todos los ciudadanos. Incluye no contaminar, reciclar y cuidar los recursos naturales."},
+  {q:"¿Los derechos de los niños aplican para todos sin excepción?", opts:["Solo para los niños ricos","Solo en algunos países","Sí, para todos los niños sin discriminación","Solo si se portan bien"], ans:2, exp:"Los derechos de los niños son universales. Aplican para todos los niños sin importar raza, religión, género o condición social."},
+  {q:"¿Qué es el 'derecho al juego'?", opts:["Jugar videojuegos todo el día","El derecho a tener tiempo libre, recreación y descanso","Solo jugar deportes","Un derecho solo para algunos niños"], ans:1, exp:"El derecho al juego garantiza que los niños tengan tiempo para descansar, jugar y participar en actividades recreativas y culturales."},
+  {q:"¿Cuándo tienen derechos los niños?", opts:["Solo desde los 5 años","Desde que nacen hasta los 18 años","Solo cuando van al colegio","Desde los 3 años"], ans:1, exp:"Los derechos de la infancia protegen a todas las personas desde su nacimiento hasta los 18 años."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'derechos', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

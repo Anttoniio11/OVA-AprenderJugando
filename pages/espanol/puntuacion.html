@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Signos de Puntuación | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">❓ Signos de Puntuación</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 Los signos de puntuación</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;">
+    <div style="background:#FFF0EF;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.8rem">.</div><strong>Punto</strong><p style="font-size:.82rem;margin-top:4px;">Final de oración.<br><em>Hoy es lunes.</em></p></div>
+    <div style="background:#F0FFFE;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.8rem">,</div><strong>Coma</strong><p style="font-size:.82rem;margin-top:4px;">Pausa corta o listas.<br><em>pan, leche y huevos</em></p></div>
+    <div style="background:#F0EDFF;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.8rem">¿?</div><strong>Interrogación</strong><p style="font-size:.82rem;margin-top:4px;">Preguntas.<br><em>¿Cómo te llamas?</em></p></div>
+    <div style="background:#FFFBEE;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.8rem">¡!</div><strong>Exclamación</strong><p style="font-size:.82rem;margin-top:4px;">Emoción o sorpresa.<br><em>¡Qué bonito!</em></p></div>
+  </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Elige el signo correcto</h3>
+    <p class="exercise-subtitle">Selecciona el signo de puntuación que corresponde.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:"'El perro ladra muy fuerte ___' ¿Qué signo va al final?", opts:["Punto (.)","¿Interrogación?","¡Exclamación!","Coma (,)"], ans:0, exp:"Es una afirmación que termina con punto (.) Ej: El perro ladra muy fuerte."},
+    {q:"'___ Cómo te llamas ___' ¿Qué signos van?", opts:["Punto","¿ y ?","¡ y !","Coma"], ans:1, exp:"Es una pregunta. En español se pone ¿ al inicio y ? al final: ¿Cómo te llamas?"},
+    {q:"'Compré manzanas ___ peras y uvas' ¿Qué signo va en el espacio?", opts:["Punto","Interrogación","Exclamación","Coma"], ans:3, exp:"La coma (,) separa elementos en una lista: manzanas, peras y uvas."},
+    {q:"'___ Qué sorpresa tan grande ___' ¿Qué signos van?", opts:["Punto","Interrogación","¡ y !","Coma"], ans:2, exp:"Es una exclamación de sorpresa. Se pone ¡ al inicio y ! al final: ¡Qué sorpresa!"},
+    {q:"¿Cuándo se usa el punto (.) ?", opts:["Para hacer preguntas","Al final de una afirmación completa","Para separar elementos de una lista","Para expresar sorpresa"], ans:1, exp:"El punto (.) se usa al final de una oración afirmativa completa."},
+    {q:"'Me gustan los gatos ___ los perros y los pájaros' ¿Qué signo falta?", opts:["Punto","Coma","¿?","¡!"], ans:1, exp:"La coma separa elementos en una lista: los gatos, los perros y los pájaros."},
+    {q:"¿Cuántos signos de interrogación lleva una pregunta en español?", opts:["Solo uno al final (?)","Dos: uno al inicio (¿) y uno al final (?)","Solo uno al inicio (¿)","Ninguno"], ans:1, exp:"En español se pone ¿ al inicio y ? al final: ¿Cómo estás?"},
+    {q:"'___ Ganamos el partido ___' ¿Qué signos van?", opts:["Punto","Coma","¿Interrogación?","¡Exclamación!"], ans:3, exp:"Es una exclamación de alegría → ¡Ganamos el partido!"},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'puntuacion', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

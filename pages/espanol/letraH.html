@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>La Letra H Silenciosa | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">🤫 La Letra H Silenciosa</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 ¿Cuándo se escribe H?</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;">
+    <div style="background:#FFF0EF;border-radius:12px;padding:12px;"><strong>1. ie, ia, ue, ui al inicio</strong><p style="font-size:.85rem;margin-top:4px;"><em>hielo, hueso, huevo, huir</em></p></div>
+    <div style="background:#F0FFFE;border-radius:12px;padding:12px;"><strong>2. Familia de palabras</strong><p style="font-size:.85rem;margin-top:4px;"><em>hablar→hablo, hacer→hecho</em></p></div>
+    <div style="background:#F0EDFF;border-radius:12px;padding:12px;"><strong>3. Verbo "haber"</strong><p style="font-size:.85rem;margin-top:4px;"><em>ha, he, has, hay, había</em></p></div>
+    <div style="background:#FFFBEE;border-radius:12px;padding:12px;"><strong>4. Palabras especiales</strong><p style="font-size:.85rem;margin-top:4px;"><em>hola, hora, hospital, hoja</em></p></div>
+  </div>
+  <div style="background:#EAFAF1;border-radius:12px;padding:12px;margin-top:10px;font-size:.9rem;">⚠️ <strong>ha</strong> (verbo: Ella ha llegado) vs <strong>a</strong> (preposición: Voy a casa)</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 ¿Con H o sin H?</h3>
+    <p class="exercise-subtitle">Elige la forma correctamente escrita.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:"¿Cuál está bien escrito?", opts:["uevo","güevo","huevo","wuevo"], ans:2, exp:"Huevo empieza con 'hue' → lleva H: huevo."},
+    {q:"¿Cuál está bien escrito?", opts:["ola","hola","jola","wola"], ans:1, exp:"Hola es una palabra que memorizamos con H."},
+    {q:"'Ella ___ llegado tarde' ¿ha o a?", opts:["a llegado","ha llegado","á llegado","ja llegado"], ans:1, exp:"'Ha' es forma del verbo haber y lleva H: ha llegado."},
+    {q:"'___ y leche en la nevera' ¿Cuál va?", opts:["Ay","Hai","Hay","Ahí"], ans:2, exp:"'Hay' (existe algo) lleva H: Hay leche = existe leche."},
+    {q:"¿Cuál está bien escrito?", opts:["ielo","yelo","hielo","jelo"], ans:2, exp:"Hielo empieza con 'hie' → lleva H: hielo."},
+    {q:"¿Cuál está bien escrito?", opts:["ospital","hospital","jospital","haspital"], ans:1, exp:"Hospital lleva H. Es una palabra que memorizamos."},
+    {q:"'La hierba del jardín está verde' ¿Está bien escrito 'hierba'?", opts:["No, es 'yerba' sin H","Sí, las palabras con 'hie' llevan H","No, es 'hierva'","Sí, pero se puede escribir sin H"], ans:1, exp:"Hierba empieza con 'hie' → lleva H: hierba."},
+    {q:"'Voy ___ la tienda' ¿ha o a?", opts:["ha la tienda","a la tienda","á la tienda","há la tienda"], ans:1, exp:"Aquí 'a' es preposición (indica dirección), no verbo → NO lleva H: Voy a la tienda."},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'letraH', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

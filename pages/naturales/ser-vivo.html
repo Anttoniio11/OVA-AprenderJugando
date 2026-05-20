@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Seres Vivos | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🦋 Seres Vivos</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 ¿Qué es un ser vivo?</h3>
+<p style="line-height:1.9;margin-bottom:12px;">Los seres vivos <strong>nacen, crecen, se reproducen y mueren</strong>. También necesitan alimentarse y respirar.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div style="background:#EAFAF1;border-radius:12px;padding:12px;"><h4 style="color:var(--nat-color);">✅ Seres Vivos</h4><p style="font-size:.88rem;line-height:1.8;">Personas, animales, plantas, bacterias, hongos.</p></div>
+<div style="background:#FFF0EF;border-radius:12px;padding:12px;"><h4 style="color:var(--primary);">❌ No son seres vivos</h4><p style="font-size:.88rem;line-height:1.8;">Piedras, agua, aire, nubes, sillas, carros.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Seres Vivos</h3>
+    <p class="exercise-subtitle">Clasifica cada elemento correctamente.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuál de estos ES un ser vivo?", opts:["Una piedra","El agua","Una mariposa","El viento"], ans:2, exp:"La mariposa nace, crece, se alimenta, se reproduce y muere → es un ser vivo."},
+  {q:"¿Cuál de estas NO es una característica de los seres vivos?", opts:["Se alimentan","Se reproducen","Son de metal","Respiran"], ans:2, exp:"'Ser de metal' no es característica de los seres vivos. Los seres vivos nacen, crecen, se reproducen, se alimentan y mueren."},
+  {q:"¿Las plantas son seres vivos?", opts:["No, porque no se mueven","Sí, porque nacen, crecen y se reproducen","No, porque no respiran","Solo las flores lo son"], ans:1, exp:"¡Sí! Las plantas son seres vivos. Nacen, crecen, se reproducen (con semillas) y mueren."},
+  {q:"¿Cuál de estas es una función de los seres vivos?", opts:["Pesarse a sí mismos","Reproducirse","Cambiar de color siempre","Flotar en el agua"], ans:1, exp:"Reproducirse (tener crías o semillas) es una de las funciones vitales de todos los seres vivos."},
+  {q:"¿El fuego es un ser vivo?", opts:["Sí, porque se mueve","Sí, porque crece","No, porque no se reproduce ni tiene células","Sí, porque consume oxígeno"], ans:2, exp:"El fuego NO es un ser vivo. Aunque consume oxígeno y crece, no tiene células ni se reproduce."},
+  {q:"¿Qué necesitan todos los seres vivos para sobrevivir?", opts:["Solo agua","Solo aire","Nutrición, agua y condiciones adecuadas","Solo luz solar"], ans:2, exp:"Todos los seres vivos necesitan nutrición (alimento), agua y condiciones adecuadas (temperatura, etc.)."},
+  {q:"¿Los hongos (como los champiñones) son seres vivos?", opts:["No, son minerales","No, son plantas","Sí, forman el reino Fungi","Solo algunos lo son"], ans:2, exp:"Sí, los hongos son seres vivos y forman su propio reino: Fungi. Nacen, crecen y se reproducen."},
+  {q:"¿Cuál de las siguientes es una diferencia entre vivos y no vivos?", opts:["Los vivos tienen color","Los vivos se reproducen, los no vivos no","Los no vivos son más grandes","Los vivos no se mueven"], ans:1, exp:"La reproducción es exclusiva de los seres vivos. Las piedras, el agua y el aire no se reproducen."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'serVivo', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

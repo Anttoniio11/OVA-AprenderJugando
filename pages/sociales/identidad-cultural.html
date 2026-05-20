@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Identidad Cultural | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">🎭 Identidad Cultural</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 ¿Qué es la identidad cultural?</h3>
+<p style="line-height:1.9;margin-bottom:10px;">La <strong>identidad cultural</strong> es el conjunto de costumbres, tradiciones, valores y características que nos hacen únicos como comunidad o nación.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;">
+<div style="background:#FFFBEE;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🎶</div><strong style="font-size:.85rem;">Música</strong><p style="font-size:.78rem;">Cumbia, vallenato, bambuco</p></div>
+<div style="background:#FDEBD0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🍲</div><strong style="font-size:.85rem;">Gastronomía</strong><p style="font-size:.78rem;">Ajiaco, bandeja paisa, sancocho</p></div>
+<div style="background:#D5F5E3;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">💃</div><strong style="font-size:.85rem;">Danzas</strong><p style="font-size:.78rem;">Mapalé, torbellino, sanjuanero</p></div>
+<div style="background:#D6EAF8;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🏛️</div><strong style="font-size:.85rem;">Patrimonio</strong><p style="font-size:.78rem;">Cartagena amurallada, Ciudad Perdida</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Identidad Cultural</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué es la identidad cultural?", opts:["Solo la comida típica","El conjunto de costumbres, tradiciones y valores que nos identifican como comunidad","Solo el idioma que hablamos","La ropa que usamos"], ans:1, exp:"La identidad cultural incluye costumbres, tradiciones, valores, arte, gastronomía, idioma y todo lo que nos identifica como comunidad."},
+  {q:"¿Cuál es el ritmo musical más representativo de la Costa Caribe colombiana?", opts:["Bambuco","Tango","Vallenato","Cumbia"], ans:2, exp:"El vallenato es el género musical más representativo de la Costa Caribe. Fue declarado Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO."},
+  {q:"¿Cuál es el baile nacional de Colombia?", opts:["Salsa","Mapalé","Bambuco","Cumbia"], ans:2, exp:"El bambuco es la danza y música nacional de Colombia, representativo de la región Andina."},
+  {q:"¿Por qué es importante preservar la identidad cultural?", opts:["Solo para el turismo","Para mantener vivas las tradiciones y el sentido de pertenencia de una comunidad","No es importante","Solo para los adultos mayores"], ans:1, exp:"Preservar la identidad cultural mantiene vivas las tradiciones, fortalece el sentido de pertenencia y permite que las nuevas generaciones conozcan su historia."},
+  {q:"¿Cuál es una tradición cultural de la región del Cauca?", opts:["El Carnaval de Barranquilla","La Feria de Cali","El Festival de las Artes de Popayán y la Semana Santa","El Vallenato"], ans:2, exp:"Popayán es reconocida mundialmente por su Semana Santa y sus festividades culturales. La ciudad es Patrimonio de la Humanidad."},
+  {q:"¿Qué es el patrimonio cultural?", opts:["Solo los museos","Los bienes materiales e inmateriales heredados de generaciones anteriores","Solo los monumentos históricos","Las obras de arte modernas"], ans:1, exp:"El patrimonio cultural incluye todo lo heredado de generaciones pasadas: monumentos, tradiciones, música, conocimientos, gastronomía, etc."},
+  {q:"¿Cuál de estos platos es típico de la región Andina colombiana?", opts:["Ceviche","Bandeja paisa y ajiaco","Arepa de chócolo solo","Mote de queso"], ans:1, exp:"La bandeja paisa (de Antioquia) y el ajiaco (de Bogotá) son platos típicos de la región Andina colombiana."},
+  {q:"¿Qué significa 'diversidad cultural'?", opts:["Que todos somos iguales","La variedad de culturas, tradiciones y formas de vida que existen","Que hay muchos países","Solo la diferencia de idiomas"], ans:1, exp:"La diversidad cultural es la variedad de culturas, tradiciones, costumbres y formas de vida que existen en un país o en el mundo. Colombia es uno de los países más diversos culturalmente."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'identidad', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

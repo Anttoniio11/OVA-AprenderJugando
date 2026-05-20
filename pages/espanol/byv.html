@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>La B y la V | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">🅱️ La B y la V</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 ¿Cuándo usar B o V?</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:#FFF0EF;border-radius:12px;padding:14px;">
+      <h4 style="color:var(--primary);margin-bottom:8px;">Usa la B 🐴</h4>
+      <ul style="padding-left:16px;line-height:2;font-size:.9rem;">
+        <li>Verbos en <strong>-aba</strong>: <em>cantaba</em></li>
+        <li>Después de <strong>m</strong>: <em>también</em></li>
+        <li>Con <strong>bl, br</strong>: <em>blanco, brazo</em></li>
+        <li><strong>bue, bui, bie</strong>: <em>bueno</em></li>
+      </ul>
+    </div>
+    <div style="background:#F0FFFE;border-radius:12px;padding:14px;">
+      <h4 style="color:var(--secondary);margin-bottom:8px;">Usa la V 🐮</h4>
+      <ul style="padding-left:16px;line-height:2;font-size:.9rem;">
+        <li>Después de <strong>n</strong>: <em>enviar</em></li>
+        <li>Adjetivos <strong>-ivo/-iva</strong>: <em>activo</em></li>
+        <li>Después de <strong>d</strong>: <em>advertir</em></li>
+        <li><strong>vice-, villa-</strong>: <em>villa</em></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 ¿B o V?</h3>
+    <p class="exercise-subtitle">Elige la letra correcta para cada palabra.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:"¿Qué letra va en: ___ueno?", opts:["B → Bueno","V → Vueno"], ans:0, exp:"Las palabras con 'bue' llevan B: Bueno."},
+    {q:"¿Qué letra va en: acti___o?", opts:["B → actibo","V → activo"], ans:1, exp:"Los adjetivos terminados en -ivo/-iva llevan V: activo."},
+    {q:"¿Qué letra va en: cam___io?", opts:["B → cambio","V → camvio"], ans:0, exp:"Después de M siempre va B: cambio."},
+    {q:"¿Qué letra va en: con___ite?", opts:["B → conbite","V → convite"], ans:1, exp:"Después de N va V: convite."},
+    {q:"¿Qué letra va en: ___lanco?", opts:["B → blanco","V → vlanco"], ans:0, exp:"La combinación BL siempre lleva B: blanco."},
+    {q:"¿Qué letra va en: tam___ién?", opts:["B → también","V → tamvién"], ans:0, exp:"Después de M va B: también."},
+    {q:"'Yo juga___ en el parque' ¿B o V?", opts:["B → jugaba","V → jugava"], ans:0, exp:"Los verbos en -aba llevan B: jugaba."},
+    {q:"'Mi maestra es muy creati___a' ¿B o V?", opts:["B → creativba","V → creativa"], ans:1, exp:"Los adjetivos -iva/-ivo llevan V: creativa."},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'byv', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

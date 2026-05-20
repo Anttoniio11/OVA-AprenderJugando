@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Valor Posicional | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--math-color);margin-bottom:4px;">🔢 Valor Posicional</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box math">
+    <h3 style="color:var(--math-color);margin-bottom:14px;">📖 Las posiciones de los números</h3>
+<div style="overflow-x:auto;margin-bottom:12px;">
+<table style="width:100%;border-collapse:collapse;text-align:center;">
+<tr style="background:var(--math-color);color:#fff;"><th style="padding:10px;border-radius:10px 0 0 0;">Centenas (C)</th><th style="padding:10px;">Decenas (D)</th><th style="padding:10px;border-radius:0 10px 0 0;">Unidades (U)</th></tr>
+<tr style="font-size:1.6rem;font-weight:900;font-family:Fredoka One,cursive;background:#F0EDFF;">
+<td style="padding:12px;color:#E17055;">3</td><td style="padding:12px;color:#00B894;">4</td><td style="padding:12px;color:#6C63FF;">7</td></tr>
+<tr style="font-size:.85rem;font-weight:700;color:var(--text-light);"><td style="padding:6px;">3×100=300</td><td style="padding:6px;">4×10=40</td><td style="padding:6px;">7×1=7</td></tr>
+</table></div>
+<div style="background:#FFFBEE;border-radius:12px;padding:12px;text-align:center;font-size:.95rem;">
+El número <strong>347</strong> = <span style="color:#E17055;font-weight:900;">300</span> + <span style="color:#00B894;font-weight:900;">40</span> + <span style="color:#6C63FF;font-weight:900;">7</span></div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Valor posicional</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"En el número 538, ¿cuánto vale el 5?", opts:["5","50","500","5000"], ans:2, exp:"El 5 está en la posición de Centenas → vale 5×100 = 500."},
+  {q:"En el número 724, ¿cuánto vale el 2?", opts:["2","20","200","2000"], ans:1, exp:"El 2 está en la posición de Decenas → vale 2×10 = 20."},
+  {q:"En el número 469, ¿cuánto vale el 9?", opts:["9","90","900","9000"], ans:0, exp:"El 9 está en la posición de Unidades → vale 9×1 = 9."},
+  {q:"¿Cómo se descompone el número 453?", opts:["4+50+3","40+5+3","400+50+3","400+5+3"], ans:2, exp:"453 = 400 (centenas) + 50 (decenas) + 3 (unidades) = 400+50+3."},
+  {q:"En el número 607, ¿cuánto vale el 0?", opts:["0","7","60","6"], ans:0, exp:"El 0 en las decenas vale 0. No agrega valor al número."},
+  {q:"¿Cuántas centenas tiene el número 850?", opts:["5 centenas","85 centenas","8 centenas","0 centenas"], ans:2, exp:"En el número 850, el dígito 8 está en las centenas → tiene 8 centenas = 800."},
+  {q:"¿Cuál es el valor del 3 en el número 325?", opts:["3","30","300","3000"], ans:2, exp:"El 3 está en la posición de Centenas → vale 3×100 = 300."},
+  {q:"¿Cómo se descompone 908?", opts:["90+8","900+0+8","9+0+8","900+8+0"], ans:1, exp:"908 = 900 (centenas) + 0 (decenas) + 8 (unidades) = 900+0+8."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'valorPosicional', 'btn-math', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

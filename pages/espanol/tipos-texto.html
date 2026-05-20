@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Tipos de Texto | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">📝 Tipos de Texto</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 Los tres tipos de texto</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;">
+    <div style="background:#FFF0EF;border-radius:14px;padding:14px;text-align:center;"><div style="font-size:2rem">📚</div><strong>El Cuento</strong><p style="font-size:.82rem;margin-top:6px;">Personajes, lugar, tiempo. Inicio, nudo y final. Puede ser imaginario.</p></div>
+    <div style="background:#F0FFFE;border-radius:14px;padding:14px;text-align:center;"><div style="font-size:2rem">✉️</div><strong>La Carta</strong><p style="font-size:.82rem;margin-top:6px;">Tiene destinatario, saludo, contenido y despedida con firma.</p></div>
+    <div style="background:#F0EDFF;border-radius:14px;padding:14px;text-align:center;"><div style="font-size:2rem">📰</div><strong>La Noticia</strong><p style="font-size:.82rem;margin-top:6px;">Informa hechos reales. Responde: ¿Qué? ¿Quién? ¿Dónde? ¿Cuándo?</p></div>
+  </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 ¿Qué tipo de texto es?</h3>
+    <p class="exercise-subtitle">Identifica el tipo de texto en cada caso.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:'"Había una vez una niña que vivía en el bosque y tenía una capa roja..."', opts:["Cuento","Carta","Noticia"], ans:0, exp:"Tiene personajes, narración y es imaginario → es un Cuento."},
+    {q:'"Querido amigo: Te escribo para contarte que me mudé. Tu amigo, Juan."', opts:["Cuento","Carta","Noticia"], ans:1, exp:"Tiene destinatario, saludo y firma → es una Carta."},
+    {q:'"Esta mañana un incendio destruyó tres casas del barrio. Los bomberos llegaron rápido."', opts:["Cuento","Carta","Noticia"], ans:2, exp:"Informa un hecho real con detalles concretos → es una Noticia."},
+    {q:"¿Qué característica es EXCLUSIVA de la carta?", opts:["Tiene título","Tiene firma y destinatario","Tiene personajes fantásticos","Tiene imágenes"], ans:1, exp:"La carta tiene destinatario (a quién va dirigida) y firma (quién la escribe)."},
+    {q:'"Estimada directora: Le solicito permiso por cita médica. Atentamente, Carlos."', opts:["Cuento","Carta","Noticia"], ans:1, exp:"Es formal, tiene destinatario y firma → es una Carta formal."},
+    {q:"¿Qué responde una noticia periodística?", opts:["Solo el final de la historia","¿Qué? ¿Quién? ¿Dónde? ¿Cuándo?","Solo quién escribió el texto","La moraleja o enseñanza"], ans:1, exp:"Una noticia debe responder las 5 preguntas: ¿Qué pasó? ¿Quién? ¿Dónde? ¿Cuándo? ¿Por qué?"},
+    {q:'"El lobo dijo: —¡Soplaré hasta derribar tu casa! El cerdito temblaba de miedo."', opts:["Cuento","Carta","Noticia"], ans:0, exp:"Tiene personajes fantásticos con diálogo y narración → es un Cuento."},
+    {q:"¿Cuál es la estructura del cuento?", opts:["Titular, cuerpo y fuente","Saludo, cuerpo y despedida","Inicio, nudo y desenlace","Introducción y conclusión"], ans:2, exp:"Todo cuento tiene: Inicio (presentación), Nudo (conflicto) y Desenlace (solución final)."},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'tiposTexto', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

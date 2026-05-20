@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>La S y la C | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">🐍 La S y la C</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 Reglas de la S y la C</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:#FFF0EF;border-radius:12px;padding:14px;">
+      <h4 style="color:var(--primary);margin-bottom:8px;">Usa la S 🐍</h4>
+      <ul style="padding-left:16px;line-height:2;font-size:.9rem;">
+        <li><strong>-oso/-osa</strong>: <em>hermoso</em></li>
+        <li><strong>-ismo, -ista</strong>: <em>turismo</em></li>
+        <li><strong>con-, dis-</strong>: <em>construir</em></li>
+      </ul>
+    </div>
+    <div style="background:#F0FFFE;border-radius:12px;padding:14px;">
+      <h4 style="color:var(--secondary);margin-bottom:8px;">Usa la C (ante e,i) 🌊</h4>
+      <ul style="padding-left:16px;line-height:2;font-size:.9rem;">
+        <li><strong>-ción</strong>: <em>canción</em></li>
+        <li><strong>-cio/-cia</strong>: <em>servicio</em></li>
+        <li><strong>-encia/-ancia</strong>: <em>paciencia</em></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 ¿S o C?</h3>
+    <p class="exercise-subtitle">Elige la opción correctamente escrita.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:"¿Cuál es la forma correcta?", opts:["canson","canción","cansion","cansón"], ans:1, exp:"Las palabras en -ción llevan C: canción."},
+    {q:"¿Cuál es la forma correcta?", opts:["hermoco","hermoso","hermocio","hermoco"], ans:1, exp:"Los adjetivos en -oso/-osa llevan S: hermoso."},
+    {q:"¿Cuál es la forma correcta?", opts:["paciensia","paciencia","pasiensia","pasiencia"], ans:1, exp:"Las terminaciones -encia llevan C: paciencia."},
+    {q:"¿Cuál es la forma correcta?", opts:["serbicio","serbizio","servicio","servizio"], ans:2, exp:"Las palabras en -cio llevan C: servicio."},
+    {q:"¿Cuál es la forma correcta?", opts:["sabrosa","sabroca","sabroza","sabroça"], ans:0, exp:"Los adjetivos en -osa/-oso llevan S: sabrosa."},
+    {q:"¿Cuál es la forma correcta?", opts:["artisto","artiste","artista","artisce"], ans:2, exp:"Las palabras en -ista llevan S: artista."},
+    {q:"¿Cuál es la forma correcta?", opts:["nacsion","nacion","nación","nasión"], ans:2, exp:"Las palabras en -ción llevan C: nación."},
+    {q:"¿Cuál es la forma correcta?", opts:["turismo","turicsmo","turicmo","turizmo"], ans:0, exp:"Las palabras en -ismo llevan S: turismo."},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'syc', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

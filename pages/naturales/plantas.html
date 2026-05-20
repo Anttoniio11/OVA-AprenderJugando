@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Las Plantas | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🌱 Las Plantas</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 Las plantas y la fotosíntesis</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">
+<div style="background:#EAFAF1;border-radius:12px;padding:12px;"><h4 style="color:var(--nat-color);margin-bottom:6px;">🌿 Partes de la planta</h4>
+<ul style="padding-left:16px;font-size:.85rem;line-height:2;">
+<li><strong>Raíz:</strong> absorbe agua y nutrientes</li>
+<li><strong>Tallo:</strong> transporta agua y sostiene</li>
+<li><strong>Hojas:</strong> realizan la fotosíntesis</li>
+<li><strong>Flor:</strong> reproducción</li>
+<li><strong>Fruto:</strong> protege las semillas</li>
+</ul>
+</div>
+<div style="background:#D5F5E3;border-radius:12px;padding:12px;"><h4 style="color:var(--nat-color);margin-bottom:6px;">☀️ La fotosíntesis</h4>
+<p style="font-size:.85rem;line-height:1.9;">Las plantas toman:<br>☀️ Luz solar + 💧 Agua + 🌬️ CO₂<br>Y producen:<br>🍬 Glucosa (alimento) + O₂ (oxígeno)</p>
+</div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Las plantas</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué parte de la planta absorbe el agua del suelo?", opts:["Las hojas","El tallo","La raíz","La flor"], ans:2, exp:"La raíz está bajo tierra y absorbe el agua y los minerales del suelo."},
+  {q:"¿Dónde se realiza la fotosíntesis?", opts:["En las raíces","En el tallo","En las hojas","En las flores"], ans:2, exp:"Las hojas realizan la fotosíntesis gracias a la clorofila (el pigmento verde)."},
+  {q:"¿Qué produce la planta durante la fotosíntesis que nos ayuda a respirar?", opts:["Agua","Dióxido de carbono","Oxígeno","Glucosa solo"], ans:2, exp:"Durante la fotosíntesis, las plantas liberan oxígeno (O₂), que nosotros necesitamos para respirar."},
+  {q:"¿Qué función tiene el tallo?", opts:["Absorber agua del suelo","Transportar agua y sostener la planta","Producir semillas","Atrapar insectos"], ans:1, exp:"El tallo transporta el agua y los nutrientes desde la raíz hasta las hojas, y sostiene a la planta."},
+  {q:"¿Qué necesita la planta para hacer la fotosíntesis?", opts:["Solo agua","Luz solar, agua y CO₂","Solo luz solar","Tierra y abono"], ans:1, exp:"Para la fotosíntesis la planta necesita: luz solar ☀️ + agua 💧 + dióxido de carbono (CO₂) 🌬️."},
+  {q:"¿Para qué sirve la flor en la planta?", opts:["Para hacer fotosíntesis","Para absorber agua","Para la reproducción","Para sostener la planta"], ans:2, exp:"Las flores permiten la reproducción de las plantas. En ellas se produce el polen para fecundación."},
+  {q:"¿Por qué las hojas son verdes?", opts:["Por el agua que contienen","Por la clorofila, un pigmento verde","Por la luz del sol","Por los nutrientes del suelo"], ans:1, exp:"Las hojas son verdes por la clorofila, el pigmento que captura la luz solar para la fotosíntesis."},
+  {q:"¿Qué es el fruto de una planta?", opts:["Una hoja especial","Una raíz modificada","La estructura que protege las semillas","Una flor sin pétalos"], ans:2, exp:"El fruto se forma de la flor y protege las semillas. Algunos frutos son comestibles (manzana, naranja)."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'plantas', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

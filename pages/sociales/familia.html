@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>La Familia | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">👨‍👩‍👧‍👦 La Familia</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 La familia</h3>
+<p style="line-height:1.9;margin-bottom:12px;">La familia es el <strong>primer grupo social</strong> al que pertenecemos. Nos cuida, nos educa y nos da amor.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div style="background:#FFFBEE;border-radius:12px;padding:12px;"><h4 style="color:var(--soc-dark);margin-bottom:8px;">Tipos de familia</h4>
+<ul style="padding-left:16px;font-size:.85rem;line-height:2;">
+<li><strong>Nuclear:</strong> papá, mamá e hijos</li>
+<li><strong>Extensa:</strong> abuelos, tíos, primos</li>
+<li><strong>Monoparental:</strong> un solo padre/madre</li>
+<li><strong>Adoptiva:</strong> padres adoptivos</li>
+</ul>
+</div>
+<div style="background:#FDEBD0;border-radius:12px;padding:12px;"><h4 style="color:var(--soc-dark);margin-bottom:8px;">Valores en familia</h4>
+<ul style="padding-left:16px;font-size:.85rem;line-height:2;">
+<li>🤝 Respeto</li><li>❤️ Amor</li><li>💬 Comunicación</li><li>🛡️ Protección</li><li>📚 Educación</li>
+</ul>
+</div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 La familia</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué tipo de familia está formada por papá, mamá e hijos?", opts:["Extensa","Nuclear","Monoparental","Adoptiva"], ans:1, exp:"La familia nuclear está formada por papá, mamá e hijos. Es la estructura familiar más común."},
+  {q:"¿Cuál es la función principal de la familia?", opts:["Solo dar dinero","Cuidar, educar y dar amor a sus miembros","Solo vivir juntos","Trabajar juntos"], ans:1, exp:"La familia cuida, protege, educa y brinda amor a sus miembros. Es el primer grupo social del ser humano."},
+  {q:"¿Qué tipo de familia tiene solo uno de los padres con sus hijos?", opts:["Familia extensa","Familia nuclear","Familia monoparental","Familia adoptiva"], ans:2, exp:"La familia monoparental está formada por uno solo de los padres (papá o mamá) con sus hijos."},
+  {q:"¿Cuál es un valor importante para la convivencia familiar?", opts:["La envidia","El respeto","La indiferencia","La competencia"], ans:1, exp:"El respeto es fundamental en la familia. Implica valorar a cada miembro, escuchar y no lastimar a nadie."},
+  {q:"¿Qué es la familia extensa?", opts:["Una familia con muchos hijos","La que incluye abuelos, tíos, primos y más parientes","Una familia de muchos países","La más antigua del mundo"], ans:1, exp:"La familia extensa incluye a los padres, hijos, abuelos, tíos, primos y demás parientes."},
+  {q:"¿Por qué es importante la comunicación en la familia?", opts:["Para hacer más ruido","Para conocerse mejor, resolver conflictos y expresar sentimientos","No es importante","Solo para los adultos"], ans:1, exp:"La comunicación permite que los miembros se conozcan, expresen sus sentimientos y resuelvan conflictos de forma pacífica."},
+  {q:"¿Qué significa 'adopción' en el contexto familiar?", opts:["Tener muchos hijos propios","Dar en adopción a los hijos","Recibir a un niño o niña como hijo propio aunque no sea biológico","Cambiar de familia"], ans:2, exp:"La adopción es cuando una familia recibe legalmente a un niño o niña como hijo propio, brindándole amor y cuidado."},
+  {q:"¿Cuál es un deber de los hijos en la familia?", opts:["Solo recibir","Respetar a sus padres y colaborar en casa","No hacer nada","Solo estudiar"], ans:1, exp:"Los hijos tienen deberes como respetar a sus padres y familiares, colaborar en el hogar y estudiar con responsabilidad."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'familia', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

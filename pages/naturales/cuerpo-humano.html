@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>El Cuerpo Humano | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🫀 El Cuerpo Humano</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 Sistemas del cuerpo humano</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+<div style="background:#EAFAF1;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem">🍎</div><strong>Digestivo</strong><p style="font-size:.8rem;margin-top:4px;">Procesa los alimentos: boca → estómago → intestinos.</p></div>
+<div style="background:#EBF5FB;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem">🫁</div><strong>Respiratorio</strong><p style="font-size:.8rem;margin-top:4px;">Toma oxígeno: nariz → pulmones.</p></div>
+<div style="background:#FDEDEC;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem">🫀</div><strong>Circulatorio</strong><p style="font-size:.8rem;margin-top:4px;">El corazón bombea sangre por todo el cuerpo.</p></div>
+<div style="background:#FEF9E7;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem">🦴</div><strong>Óseo</strong><p style="font-size:.8rem;margin-top:4px;">Los huesos sostienen y protegen el cuerpo.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 El cuerpo humano</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué sistema procesa los alimentos?", opts:["Sistema respiratorio","Sistema nervioso","Sistema digestivo","Sistema circulatorio"], ans:2, exp:"El sistema digestivo procesa los alimentos. Boca → esófago → estómago → intestinos."},
+  {q:"¿Cuál es el órgano principal del sistema circulatorio?", opts:["Los pulmones","El estómago","El cerebro","El corazón"], ans:3, exp:"El corazón es el motor del sistema circulatorio. Bombea sangre a todo el cuerpo."},
+  {q:"¿Qué hace el sistema respiratorio?", opts:["Digiere los alimentos","Toma oxígeno del aire y elimina CO₂","Produce sangre","Mueve los músculos"], ans:1, exp:"El sistema respiratorio toma oxígeno del aire (respiración) y elimina dióxido de carbono."},
+  {q:"¿Cuántos huesos tiene aproximadamente el cuerpo humano adulto?", opts:["100 huesos","206 huesos","300 huesos","50 huesos"], ans:1, exp:"El esqueleto adulto tiene aproximadamente 206 huesos. ¡Los bebés nacen con más de 300!"},
+  {q:"¿Dónde se absorben los nutrientes de los alimentos?", opts:["En la boca","En el estómago","En el intestino delgado","En el colon"], ans:2, exp:"Los nutrientes de los alimentos se absorben principalmente en el intestino delgado."},
+  {q:"¿Qué órgano produce el oxígeno que necesitamos?", opts:["El corazón","Los riñones","Ninguno, lo tomamos del aire","El hígado"], ans:2, exp:"¡Nosotros no producimos oxígeno! Lo tomamos del aire que respiramos. Las plantas sí producen oxígeno."},
+  {q:"¿Qué función tienen los pulmones?", opts:["Bombear sangre","Filtrar toxinas","Intercambiar oxígeno y CO₂","Digerir los alimentos"], ans:2, exp:"Los pulmones intercambian gases: toman oxígeno del aire y liberan dióxido de carbono."},
+  {q:"¿Qué sistema controla y coordina todo el cuerpo?", opts:["Sistema digestivo","Sistema nervioso","Sistema circulatorio","Sistema óseo"], ans:1, exp:"El sistema nervioso (cerebro, médula espinal y nervios) controla y coordina todas las funciones del cuerpo."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'cuerpoHumano', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

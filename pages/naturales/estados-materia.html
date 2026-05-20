@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Estados de la Materia | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">🧊 Estados de la Materia</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 Los tres estados de la materia</h3>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+<div style="background:#D6EAF8;border-radius:14px;padding:14px;text-align:center;"><div style="font-size:2rem">🧊</div><strong>Sólido</strong><p style="font-size:.82rem;margin-top:6px;">Forma y volumen fijos.<br><em>Hielo, madera, piedra</em></p></div>
+<div style="background:#D5F5E3;border-radius:14px;padding:14px;text-align:center;"><div style="font-size:2rem">💧</div><strong>Líquido</strong><p style="font-size:.82rem;margin-top:6px;">Volumen fijo, toma la forma del recipiente.<br><em>Agua, leche, jugo</em></p></div>
+<div style="background:#FDEBD0;border-radius:14px;padding:14px;text-align:center;"><div style="font-size:2rem">💨</div><strong>Gaseoso</strong><p style="font-size:.82rem;margin-top:6px;">Sin forma ni volumen fijos.<br><em>Aire, vapor, humo</em></p></div>
+</div>
+<div style="background:#FFFBEE;border-radius:12px;padding:10px;margin-top:10px;font-size:.88rem;text-align:center;">
+🧊 Sólido → Líquido: <strong>fusión</strong> (calentando) | Líquido → Gaseoso: <strong>evaporación</strong></div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Estados de la Materia</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿En qué estado se encuentra el hielo?", opts:["Líquido","Gaseoso","Sólido","Plasma"], ans:2, exp:"El hielo es agua en estado sólido. Tiene forma y volumen fijos."},
+  {q:"¿Qué ocurre cuando calentamos el hielo?", opts:["Se convierte en vapor directamente","Se convierte en líquido (fusión)","Se hace más duro","Desaparece"], ans:1, exp:"Al calentar el hielo, se derrite y se convierte en agua líquida. Esto se llama fusión."},
+  {q:"¿En qué estado está el aire que respiramos?", opts:["Sólido","Líquido","Gaseoso","Es un plasma"], ans:2, exp:"El aire (mezcla de gases) está en estado gaseoso. No tiene forma ni volumen fijos."},
+  {q:"¿Qué caracteriza a un líquido?", opts:["Tiene forma y volumen fijos","Toma la forma del recipiente pero conserva su volumen","No tiene forma ni volumen","Es siempre transparente"], ans:1, exp:"Los líquidos tienen volumen fijo pero toman la forma del recipiente que los contiene."},
+  {q:"¿Cómo se llama el cambio de líquido a gaseoso?", opts:["Fusión","Solidificación","Condensación","Evaporación"], ans:3, exp:"La evaporación es el cambio de estado líquido a gaseoso (por ejemplo, el agua que se convierte en vapor)."},
+  {q:"¿Cuál de estos es un sólido?", opts:["El jugo de naranja","El vapor de agua","Una manzana","El oxígeno"], ans:2, exp:"Una manzana es un sólido: tiene forma y volumen fijos propios."},
+  {q:"¿Qué pasa al enfriar el vapor de agua?", opts:["Se solidifica directamente","Se convierte en líquido (condensación)","Se expande","No cambia"], ans:1, exp:"Al enfriarse, el vapor de agua se condensa y se convierte en líquido. Es la condensación."},
+  {q:"El chocolate se derrite al calentarlo. ¿De qué estado pasa a cuál?", opts:["De gaseoso a líquido","De sólido a gaseoso","De sólido a líquido","De líquido a sólido"], ans:2, exp:"El chocolate sólido se derrite (fusión) al calentarse y pasa a ser líquido."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'estadosMateria', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

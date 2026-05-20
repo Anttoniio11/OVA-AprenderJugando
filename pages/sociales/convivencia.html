@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Convivencia y Paz | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">🤝 Convivencia y Paz</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 Convivencia y Paz</h3>
+<p style="line-height:1.9;margin-bottom:10px;">La <strong>convivencia</strong> es la capacidad de vivir con otros, respetando las diferencias y resolviendo los conflictos de forma pacífica.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">
+<div style="background:#EAFAF1;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🤝</div><strong style="font-size:.85rem;">Respeto</strong><p style="font-size:.78rem;">Valorar a los demás como son.</p></div>
+<div style="background:#D5F5E3;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">💬</div><strong style="font-size:.85rem;">Diálogo</strong><p style="font-size:.78rem;">Hablar para resolver conflictos.</p></div>
+<div style="background:#FFFBEE;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">❤️</div><strong style="font-size:.85rem;">Empatía</strong><p style="font-size:.78rem;">Ponerse en el lugar del otro.</p></div>
+<div style="background:#FDEBD0;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:1.4rem">🙌</div><strong style="font-size:.85rem;">Solidaridad</strong><p style="font-size:.78rem;">Ayudar a quienes lo necesitan.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Convivencia y Paz</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué es la empatía?", opts:["Ignorar los sentimientos de los demás","La capacidad de ponerse en el lugar del otro y comprender sus sentimientos","Ser muy inteligente","Tener muchos amigos"], ans:1, exp:"La empatía es la capacidad de ponerse en el lugar del otro y comprender cómo se siente. Es fundamental para la buena convivencia."},
+  {q:"¿Cuál es la mejor manera de resolver un conflicto?", opts:["Pelear físicamente","Ignorar el problema","Dialogar y buscar soluciones juntos","Pedir que otro lo resuelva siempre"], ans:2, exp:"El diálogo es la mejor forma de resolver conflictos. Hablar con respeto y escuchar al otro permite encontrar soluciones pacíficas."},
+  {q:"¿Qué es el bullying o matoneo?", opts:["Un juego normal entre compañeros","Acoso o maltrato repetido hacia una persona","Una forma de hacer amigos","Un deporte escolar"], ans:1, exp:"El bullying es el acoso o maltrato físico, verbal o psicológico repetido hacia una persona. Es una violación de los derechos y debe reportarse."},
+  {q:"¿Cuál de estas es una actitud de buena convivencia?", opts:["Burlarse de los demás","Excluir a compañeros","Respetar las diferencias de cada persona","Hacer ruido para molestar"], ans:2, exp:"Respetar las diferencias de cada persona es fundamental para la buena convivencia. Todos somos diferentes y eso nos enriquece."},
+  {q:"¿Qué es la solidaridad?", opts:["Ayudar solo a quienes conocemos","Apoyar y ayudar a quienes lo necesitan sin esperar nada a cambio","Un tipo de negocio","Solo ayudar en emergencias"], ans:1, exp:"La solidaridad es apoyar a quienes lo necesitan. Es un valor fundamental para construir una sociedad más justa y pacífica."},
+  {q:"¿Cómo se llama el proceso de resolver conflictos con la ayuda de una tercera persona neutral?", opts:["Pelea","Mediación","Eliminación","Competencia"], ans:1, exp:"La mediación es cuando una tercera persona neutral ayuda a las partes en conflicto a encontrar una solución justa y pacífica."},
+  {q:"¿Cuál es una norma de convivencia en el colegio?", opts:["Llegar tarde siempre","Respetar los turnos y escuchar cuando habla el docente","Hablar en clase sin permiso","No hacer las tareas"], ans:1, exp:"Respetar los turnos y escuchar atentamente son normas de convivencia escolar básicas que permiten el aprendizaje de todos."},
+  {q:"¿Por qué es importante la paz?", opts:["Solo para no tener guerras","Porque sin paz no puede haber desarrollo, bienestar ni progreso para nadie","Solo es importante en los países en guerra","No es tan importante"], ans:1, exp:"La paz es fundamental. Sin ella no puede haber educación, salud, desarrollo económico ni bienestar para los ciudadanos."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'convivencia', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Regiones de Colombia | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">🗺️ Regiones de Colombia</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 Las 6 regiones de Colombia</h3>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+<div style="background:#EAFAF1;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🌊 Caribe</strong><p>Costa norte. Cartagena, Barranquilla.</p></div>
+<div style="background:#D5F5E3;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🌊 Pacífico</strong><p>Costa oeste. Buenaventura, Quibdó.</p></div>
+<div style="background:#FDEBD0;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🏔️ Andina</strong><p>Cordilleras. Bogotá, Medellín, Cali, Popayán.</p></div>
+<div style="background:#D6EAF8;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🌿 Orinoquía</strong><p>Llanos orientales. Villavicencio.</p></div>
+<div style="background:#FDEDEC;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🌳 Amazonía</strong><p>Selva amazónica. Leticia.</p></div>
+<div style="background:#F0EDFF;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🏝️ Insular</strong><p>Islas. San Andrés, Providencia.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Regiones de Colombia</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuántas regiones naturales tiene Colombia?", opts:["4 regiones","5 regiones","6 regiones","8 regiones"], ans:2, exp:"Colombia tiene 6 regiones naturales: Caribe, Pacífico, Andina, Orinoquía, Amazonía e Insular."},
+  {q:"¿En qué región está ubicada Bogotá, la capital de Colombia?", opts:["Región Caribe","Región Pacífico","Región Andina","Región Orinoquía"], ans:2, exp:"Bogotá está en la Región Andina, en la cordillera Oriental. También Medellín, Cali y Popayán están en esta región."},
+  {q:"¿Cuál región de Colombia tiene los Llanos Orientales?", opts:["Región Caribe","Región Andina","Región Amazónica","Región Orinoquía"], ans:3, exp:"La región de la Orinoquía o Llanos Orientales se caracteriza por sus extensas llanuras ganaderas."},
+  {q:"¿Qué ciudad colombiana es capital de la región Caribe?", opts:["Cali","Medellín","Cartagena","Leticia"], ans:2, exp:"Cartagena y Barranquilla son las ciudades más importantes de la Región Caribe (costa norte)."},
+  {q:"¿Dónde está ubicado San Andrés?", opts:["Región Andina","Región Caribe","Región Insular","Región Pacífico"], ans:2, exp:"San Andrés y Providencia pertenecen a la Región Insular (islas). Están en el mar Caribe."},
+  {q:"¿Cuál región tiene la mayor biodiversidad (variedad de vida) de Colombia?", opts:["Región Andina","Región Insular","Región Amazónica","Región Caribe"], ans:2, exp:"La Amazonia tiene la mayor biodiversidad de Colombia y del mundo. Leticia es su ciudad principal."},
+  {q:"Popayán, capital del Cauca, está en la Región...", opts:["Caribe","Orinoquía","Pacífico","Andina"], ans:3, exp:"Popayán está ubicada en la Región Andina, en el macizo colombiano. Es una ciudad colonial conocida como 'La Ciudad Blanca'."},
+  {q:"¿Qué caracteriza a la Región Pacífica de Colombia?", opts:["Es seca y desértica","Es la más poblada","Tiene selva húmeda y gran biodiversidad","Es de llanuras y ganadería"], ans:2, exp:"La Región Pacífica tiene selva húmeda tropical, gran biodiversidad y alta pluviosidad (mucha lluvia). Tiene riqueza cultural afrocolombiana."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'regiones', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

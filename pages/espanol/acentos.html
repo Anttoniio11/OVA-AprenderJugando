@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Acentuación y Tilde | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--lang-color);margin-bottom:4px;">´ Acentuación y Tilde</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box ">
+    <h3 style="color:var(--lang-color);margin-bottom:14px;">📖 ¿Cuándo se escribe tilde?</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+    <div style="background:#FFF0EF;border-radius:14px;padding:14px;">
+      <h4 style="color:var(--primary);">Agudas</h4>
+      <p style="font-size:.88rem;line-height:1.8;">Acento en la <strong>última</strong> sílaba.<br>Llevan tilde si terminan en <strong>n, s o vocal</strong>.<br><em>ca-fé, can-ción, co-mí</em></p>
+    </div>
+    <div style="background:#F0FFFE;border-radius:14px;padding:14px;">
+      <h4 style="color:var(--secondary);">Graves o Llanas</h4>
+      <p style="font-size:.88rem;line-height:1.8;">Acento en la <strong>penúltima</strong> sílaba.<br>Llevan tilde si <strong>NO</strong> terminan en n, s o vocal.<br><em>ár-bol, cés-ped, al-bum</em></p>
+    </div>
+    <div style="background:#F0EDFF;border-radius:14px;padding:14px;">
+      <h4 style="color:var(--accent4);">Esdrújulas</h4>
+      <p style="font-size:.88rem;line-height:1.8;">Acento en la <strong>antepenúltima</strong> sílaba.<br><strong>Siempre llevan tilde.</strong><br><em>mú-si-ca, pá-ja-ro, sá-ba-do</em></p>
+    </div>
+  </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Preguntas sobre acentuación</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta para cada pregunta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+    {q:"¿Qué tipo de palabra es 'canción'?", opts:["Grave","Aguda","Esdrújula","Monosílaba"], ans:1, exp:"'Canción' tiene el acento en la última sílaba (ción) → es AGUDA. Termina en 'n', por eso lleva tilde."},
+    {q:"¿Qué tipo de palabra es 'música'?", opts:["Aguda","Grave","Esdrújula","Bisílaba"], ans:2, exp:"'Mú-si-ca' tiene el acento en la antepenúltima sílaba (mú) → es ESDRÚJULA. Siempre llevan tilde."},
+    {q:"¿Qué tipo de palabra es 'árbol'?", opts:["Aguda","Grave","Esdrújula","Trisílaba"], ans:1, exp:"'Ár-bol' tiene el acento en la penúltima sílaba (ár) → es GRAVE. Termina en 'l', que no es n, s ni vocal, por eso lleva tilde."},
+    {q:"La palabra 'cafe' ¿lleva tilde?", opts:["No, es grave","Sí → café, es aguda que termina en vocal","No, es esdrújula","Sí, siempre"], ans:1, exp:"'Café' es AGUDA (acento en la última sílaba) y termina en vocal → lleva tilde: café."},
+    {q:"¿Cuál de estas palabras es esdrújula?", opts:["papel","casa","pájaro","comer"], ans:2, exp:"'Pá-ja-ro' tiene el acento en la antepenúltima sílaba → es ESDRÚJULA y siempre lleva tilde."},
+    {q:"¿Cuál de estas palabras es aguda sin tilde?", opts:["café","canción","reloj","mamá"], ans:2, exp:"'Reloj' es aguda (acento en 'loj') pero termina en 'j', que no es n, s ni vocal → NO lleva tilde."},
+    {q:"La palabra 'sábado' ¿por qué lleva tilde?", opts:["Es aguda que termina en vocal","Es grave que no termina en n/s/vocal","Es esdrújula, siempre llevan tilde","Es monosílaba especial"], ans:2, exp:"'Sá-ba-do' es ESDRÚJULA (acento en la antepenúltima sílaba). Las esdrújulas SIEMPRE llevan tilde."},
+    {q:"¿Qué tipo de palabra es 'mesa'?", opts:["Aguda sin tilde","Grave sin tilde","Esdrújula","Aguda con tilde"], ans:1, exp:"'Me-sa' tiene el acento en la penúltima sílaba → es GRAVE. Termina en vocal 'a', por eso NO lleva tilde."},
+  ];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'acentos', 'btn-primary', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Tablas de Multiplicar | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--math-color);margin-bottom:4px;">✖️ Tablas de Multiplicar</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box math">
+    <h3 style="color:var(--math-color);margin-bottom:14px;">📖 ¿Qué es la multiplicación?</h3>
+<p style="line-height:1.9;margin-bottom:12px;">Multiplicar es <strong>sumar un número varias veces</strong>.<br>
+3 × 4 = 4 + 4 + 4 = 12 (sumo 4 tres veces)</p>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+<div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×1<br><strong>2</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×2<br><strong>4</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×3<br><strong>6</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×4<br><strong>8</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×5<br><strong>10</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×6<br><strong>12</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×7<br><strong>14</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×8<br><strong>16</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×9<br><strong>18</strong></div><div style="background:#F0EDFF;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:.85rem;color:var(--math-color);">2×10<br><strong>20</strong></div>
+</div>
+<p style="margin-top:12px;font-size:.9rem;color:var(--text-light);">💡 <em>Truco: aprende de memoria. La práctica hace al maestro.</em></p>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Practica las tablas</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta para cada multiplicación.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuánto es 3 × 4?", opts:["10","12","14","8"], ans:1, exp:"3 × 4 = 12. Puedes comprobarlo sumando: 4+4+4 = 12."},
+  {q:"¿Cuánto es 5 × 6?", opts:["25","35","30","36"], ans:2, exp:"5 × 6 = 30. Es uno de los más importantes de aprender."},
+  {q:"¿Cuánto es 7 × 8?", opts:["54","56","58","64"], ans:1, exp:"7 × 8 = 56. ¡Este es uno de los más difíciles! 7×8=56."},
+  {q:"¿Cuánto es 9 × 3?", opts:["21","27","24","29"], ans:1, exp:"9 × 3 = 27. También puedes hacer 3×9 = 27 (es lo mismo)."},
+  {q:"¿Cuánto es 6 × 6?", opts:["30","34","36","38"], ans:2, exp:"6 × 6 = 36. Los cuadrados perfectos son fáciles de recordar."},
+  {q:"¿Cuánto es 4 × 7?", opts:["24","28","32","26"], ans:1, exp:"4 × 7 = 28. También puedes pensar 7×4 = 28."},
+  {q:"¿Cuánto es 8 × 8?", opts:["56","60","64","72"], ans:2, exp:"8 × 8 = 64. ¡Este es un cuadrado perfecto muy útil!"},
+  {q:"¿Cuánto es 10 × 5?", opts:["45","55","50","60"], ans:2, exp:"10 × 5 = 50. Multiplicar por 10 es fácil: agrega un cero."},
+  {q:"¿Cuánto es 2 × 9?", opts:["16","20","18","22"], ans:2, exp:"2 × 9 = 18. La tabla del 2 siempre da números pares."},
+  {q:"¿Cuánto es 3 × 3?", opts:["6","8","9","12"], ans:2, exp:"3 × 3 = 9. Es el cuadrado de 3."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'tablas', 'btn-math', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

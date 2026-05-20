@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Historia de Colombia | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--soc-dark);margin-bottom:4px;">📜 Historia de Colombia</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box soc">
+    <h3 style="color:var(--soc-dark);margin-bottom:14px;">📖 Historia de Colombia</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+<div style="background:#FFFBEE;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🗿 Pueblos Indígenas</strong><p>Muiscas, Taironas, Zenúes. Antes de la llegada española.</p></div>
+<div style="background:#FDEBD0;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>⛵ Conquista (1492+)</strong><p>Llegada de los españoles a América.</p></div>
+<div style="background:#D6EAF8;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🏛️ Colonia</strong><p>Gobierno español. Mezcla de culturas.</p></div>
+<div style="background:#EAFAF1;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🗡️ Independencia 1810</strong><p>20 de julio: Grito de Independencia.</p></div>
+<div style="background:#FDEDEC;border-radius:10px;padding:10px;text-align:center;font-size:.82rem;"><strong>🇨🇴 República</strong><p>Simón Bolívar y Francisco de Paula Santander.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Historia de Colombia</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Cuándo se celebra el Día de la Independencia de Colombia?", opts:["7 de agosto","20 de julio","12 de octubre","16 de junio"], ans:1, exp:"El 20 de julio de 1810 ocurrió el Grito de Independencia en Bogotá. Por eso se celebra la independencia ese día."},
+  {q:"¿Quién fue Simón Bolívar?", opts:["El primer presidente de España","El Libertador que luchó por la independencia de varios países de América del Sur","Un explorador español","El fundador de Bogotá"], ans:1, exp:"Simón Bolívar fue el Libertador. Lideró la independencia de Venezuela, Colombia, Ecuador, Perú y Bolivia."},
+  {q:"¿Cuál era el nombre del pueblo indígena más grande del altiplano cundiboyacense?", opts:["Taironas","Zenúes","Muiscas","Aztecas"], ans:2, exp:"Los Muiscas eran el pueblo indígena más desarrollado del altiplano cundiboyacense. Tenían avanzada organización social y comercio."},
+  {q:"¿En qué año llegó Cristóbal Colón a América?", opts:["1492","1492","1510","1776","1810"], ans:0, exp:"Cristóbal Colón llegó a América el 12 de octubre de 1492, cuando descubrió las islas del Caribe."},
+  {q:"¿Qué fue el período colonial en Colombia?", opts:["Cuando Colombia colonizó España","El período de gobierno español sobre el territorio colombiano","La época de los indígenas","La época republicana"], ans:1, exp:"La Colonia fue el período (1550-1810) en que España gobernó el territorio colombiano. Hubo mezcla de culturas indígenas, españolas y africanas."},
+  {q:"¿Cuál es la capital de Colombia?", opts:["Medellín","Cali","Cartagena","Bogotá"], ans:3, exp:"Bogotá es la capital de Colombia. Antes se llamaba Santa Fe de Bogotá y fue fundada en 1538."},
+  {q:"¿Quién fue Francisco de Paula Santander?", opts:["Un conquistador español","El hombre de las leyes, primer presidente de la Nueva Granada","Un indígena líder","El descubridor de Colombia"], ans:1, exp:"Francisco de Paula Santander fue llamado 'El hombre de las leyes'. Fue el primer presidente de la Nueva Granada (nombre anterior de Colombia)."},
+  {q:"¿Qué mezcla de culturas ocurrió durante la Colonia?", opts:["Solo española","Solo indígena","Indígena, española y africana","Indígena y asiática"], ans:2, exp:"Durante la Colonia se mezclaron tres culturas: la indígena (original), la española (conquistadora) y la africana (esclavizados). Esta mezcla define la identidad colombiana."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'historiaCol', 'btn-soc', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

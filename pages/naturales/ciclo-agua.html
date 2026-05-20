@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>El Ciclo del Agua | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--nat-color);margin-bottom:4px;">💧 El Ciclo del Agua</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box nat">
+    <h3 style="color:var(--nat-color);margin-bottom:14px;">📖 El ciclo del agua</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+<div style="background:#EAFAF1;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem;">☀️</div><strong>1. Evaporación</strong><p style="font-size:.82rem;margin-top:4px;">El sol calienta el agua y la convierte en vapor.</p></div>
+<div style="background:#EBF5FB;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem;">☁️</div><strong>2. Condensación</strong><p style="font-size:.82rem;margin-top:4px;">El vapor sube, se enfría y forma las nubes.</p></div>
+<div style="background:#D5F5E3;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem;">🌧️</div><strong>3. Precipitación</strong><p style="font-size:.82rem;margin-top:4px;">El agua cae como lluvia, nieve o granizo.</p></div>
+<div style="background:#A9DFBF;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:1.6rem;">🏔️</div><strong>4. Escorrentía</strong><p style="font-size:.82rem;margin-top:4px;">El agua regresa a ríos, lagos y mares.</p></div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 El ciclo del agua</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"¿Qué proceso convierte el agua en vapor?", opts:["Condensación","Precipitación","Evaporación","Escorrentía"], ans:2, exp:"La evaporación ocurre cuando el sol calienta el agua y la convierte en vapor de agua."},
+  {q:"¿Cómo se forman las nubes?", opts:["Por evaporación","Por condensación del vapor de agua","Por precipitación","Por escorrentía"], ans:1, exp:"Las nubes se forman por condensación: el vapor de agua sube, se enfría y se convierte en pequeñas gotas que forman las nubes."},
+  {q:"¿Qué nombre recibe cuando cae agua de las nubes?", opts:["Evaporación","Condensación","Precipitación","Infiltración"], ans:2, exp:"La precipitación es cuando el agua cae de las nubes como lluvia, nieve o granizo."},
+  {q:"¿Qué energía impulsa el ciclo del agua?", opts:["El viento","El fuego","La energía solar (el sol)","La luna"], ans:2, exp:"El sol es el motor del ciclo del agua. Su calor evapora el agua de los mares, ríos y lagos."},
+  {q:"¿Qué ocurre con el agua de lluvia que cae en las montañas?", opts:["Desaparece","Regresa a los ríos y mares (escorrentía)","Se convierte en aire","Se va al espacio"], ans:1, exp:"El agua de lluvia escurre por las montañas y regresa a los ríos, lagos y mares. Se llama escorrentía."},
+  {q:"¿Por qué el ciclo del agua se llama 'ciclo'?", opts:["Porque dura un año","Porque el agua viaja en bicicleta","Porque es un proceso que se repite continuamente","Porque tiene 4 etapas exactas"], ans:2, exp:"Se llama ciclo porque el proceso se repite una y otra vez sin cesar: evaporación → condensación → precipitación → escorrentía."},
+  {q:"¿En qué estado está el vapor de agua?", opts:["Sólido","Líquido","Gaseoso","Plasma"], ans:2, exp:"El vapor de agua es agua en estado gaseoso, invisible al ojo humano."},
+  {q:"¿Cuál de estas es una forma de precipitación?", opts:["La evaporación","El granizo","La condensación","La escorrentía"], ans:1, exp:"El granizo es una forma de precipitación (agua que cae de las nubes). También lo son la lluvia y la nieve."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'cicloAgua', 'btn-nat', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>

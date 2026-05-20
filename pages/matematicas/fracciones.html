@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Fracciones | AprenderJugando</title>
+  <link rel="stylesheet" href="../../css/styles.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../../index.html" class="logo">🎓 AprenderJugando</a>
+  <div class="nav-links"><a href="../../index.html">← Inicio</a></div>
+  <div class="score-pill" id="score-pill">⭐ 0 pts</div>
+</nav>
+
+<div class="activity-page">
+  <!-- HEADER -->
+  <div class="activity-header">
+    <a href="../../index.html" class="back-btn">← Volver</a>
+    <div style="flex:1;">
+      <h2 style="color:var(--math-color);margin-bottom:4px;">🍕 Fracciones</h2>
+      <div id="quiz-progress"></div>
+    </div>
+    <div id="chispa-container" style="flex-shrink:0;"></div>
+  </div>
+
+  <!-- QUESTION DOTS -->
+  <div id="progress-dots" class="q-nav"></div>
+
+  <!-- LESSON -->
+  <div class="lesson-box math">
+    <h3 style="color:var(--math-color);margin-bottom:14px;">📖 ¿Qué es una fracción?</h3>
+<p style="line-height:1.9;">Una fracción representa <strong>partes de un todo</strong>.<br>
+🍕 Si una pizza tiene 4 porciones y comes 1, comiste <strong>1/4</strong> (un cuarto).</p>
+<div style="background:#F0EDFF;border-radius:14px;padding:14px;margin-top:12px;text-align:center;">
+  <div style="font-size:2rem;font-family:Fredoka One,cursive;color:var(--math-color);">
+    <span style="color:var(--primary)">2</span> ← Numerador (partes que tomamos)<br>
+    <span style="font-size:1rem;">━━━━━━━━━</span><br>
+    <span style="color:var(--secondary)">4</span> ← Denominador (total de partes)
+  </div>
+</div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div class="exercise-box">
+    <h3>🎯 Problemas con fracciones</h3>
+    <p class="exercise-subtitle">Elige la respuesta correcta.</p>
+    <div id="question-area"></div>
+    <div id="quiz-nav"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-panel" id="results-panel"></div>
+</div>
+
+<script src="../../js/global.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"Una torta tiene 8 porciones. Sebas come 2. ¿Qué fracción comió?", opts:["1/4","2/8","3/8","1/8"], ans:1, exp:"Comió 2 de 8 porciones → 2/8."},
+  {q:"¿Qué fracción representa 'la mitad'?", opts:["1/4","2/3","1/2","3/4"], ans:2, exp:"La mitad es 1/2: dividir algo en 2 partes iguales y tomar 1."},
+  {q:"Una pizza tiene 4 porciones y se comen 3. ¿Cuánto queda?", opts:["1/4","2/4","3/4","4/4"], ans:0, exp:"Quedan 1 de 4 porciones → 1/4."},
+  {q:"¿Cuál fracción es mayor: 1/2 o 1/4?", opts:["1/4 es mayor","Son iguales","1/2 es mayor","Depende del número"], ans:2, exp:"1/2 es mayor que 1/4. Entre más grande el denominador, la parte es más pequeña."},
+  {q:"Un chocolate tiene 10 cuadros. Valeria come 5. ¿Qué fracción es eso?", opts:["5/10","1/2","Ambas son correctas","5/5"], ans:2, exp:"5/10 y 1/2 son equivalentes. Ambas representan la mitad."},
+  {q:"¿Cuántos cuartos (1/4) forman un entero (1)?", opts:["2","3","4","8"], ans:2, exp:"Se necesitan 4 cuartos para formar un entero: 1/4 + 1/4 + 1/4 + 1/4 = 1."},
+  {q:"Un jugo se divide en 6 partes iguales. Se beben 2. ¿Cuánto sobra?", opts:["2/6","4/6","3/6","1/6"], ans:1, exp:"Sobraron 4 de las 6 partes → 4/6."},
+  {q:"¿Qué fracción representa 'tres octavos'?", opts:["8/3","3/8","3/9","8/8"], ans:1, exp:"Tres octavos → numerador 3, denominador 8 → 3/8."},
+];
+
+let quiz;
+document.addEventListener('DOMContentLoaded', () => {
+  renderChispa('chispa-container', 'normal', chispaMsg('start'));
+  quiz = new QuizEngine(QUESTIONS, 'fracciones', 'btn-math', '../..');
+  quiz.render();
+});
+</script>
+</body>
+</html>
