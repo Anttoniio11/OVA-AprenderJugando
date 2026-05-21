@@ -29,6 +29,15 @@
 </head>
 <body>
 
+
+<!-- Animated background bubbles -->
+<div class="bg-bubbles" aria-hidden="true">
+  <div class="bg-bubble" style="width:80px;height:80px;background:#FF6B6B;left:10%;animation-duration:18s;animation-delay:0s;"></div>
+  <div class="bg-bubble" style="width:50px;height:50px;background:#6C63FF;left:25%;animation-duration:24s;animation-delay:4s;"></div>
+  <div class="bg-bubble" style="width:120px;height:120px;background:#4ECDC4;left:50%;animation-duration:20s;animation-delay:2s;"></div>
+  <div class="bg-bubble" style="width:60px;height:60px;background:#FFE66D;left:70%;animation-duration:22s;animation-delay:7s;"></div>
+  <div class="bg-bubble" style="width:90px;height:90px;background:#FF8B94;left:85%;animation-duration:16s;animation-delay:1s;"></div>
+</div>
 <nav class="navbar">
   <a href="index.html" class="logo">🎓 AprenderJugando</a>
   <div class="nav-links">
@@ -270,6 +279,7 @@ function showTab(tab) {
   document.querySelectorAll('.subject-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('sec-' + tab).classList.add('active');
   document.querySelector(`.subject-tab.${tab}`).classList.add('active');
+  if(typeof SFX !== 'undefined') SFX.tab();
 }
 
 function initHome() {
@@ -280,6 +290,11 @@ function initHome() {
   </div>`;
 
   // Stars for all cards
+  // Add click sounds to module cards
+  document.querySelectorAll('.module-card').forEach(card => {
+    card.addEventListener('click', () => { if(typeof SFX !== 'undefined') SFX.click(); });
+  });
+
   Object.values(ALL_MODULES).flat().forEach(id => {
     const el = document.getElementById('cstars-' + id);
     if (!el) return;

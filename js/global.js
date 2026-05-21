@@ -1,3 +1,55 @@
+// ===== SOUND ENGINE (Web Audio API - no files needed) =====
+const SFX = (() => {
+  let ctx = null;
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    return ctx;
+  }
+
+  function tone(freq, type, duration, vol = 0.3, delay = 0) {
+    try {
+      const c = getCtx();
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+      osc.connect(gain); gain.connect(c.destination);
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, c.currentTime + delay);
+      gain.gain.setValueAtTime(0, c.currentTime + delay);
+      gain.gain.linearRampToValueAtTime(vol, c.currentTime + delay + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + duration);
+      osc.start(c.currentTime + delay);
+      osc.stop(c.currentTime + delay + duration);
+    } catch(e) {}
+  }
+
+  return {
+    correct() {
+      tone(523, 'sine', 0.12, 0.35);
+      tone(659, 'sine', 0.12, 0.35, 0.12);
+      tone(784, 'sine', 0.2,  0.35, 0.24);
+    },
+    wrong() {
+      tone(300, 'sawtooth', 0.08, 0.2);
+      tone(250, 'sawtooth', 0.15, 0.2, 0.1);
+    },
+    click() {
+      tone(800, 'sine', 0.06, 0.15);
+    },
+    star() {
+      [523,659,784,1047].forEach((f,i) => tone(f,'sine',0.15,0.3,i*0.1));
+    },
+    complete() {
+      [392,523,659,784,1047,784,1047].forEach((f,i) => tone(f,'sine',0.18,0.35,i*0.09));
+    },
+    select() {
+      tone(660, 'sine', 0.08, 0.2);
+    },
+    tab() {
+      tone(440, 'triangle', 0.1, 0.2);
+    }
+  };
+})();
+
 // ===== GLOBAL STATE =====
 const OVA = {
   progress: JSON.parse(localStorage.getItem('ova2_progress') || '{}'),
@@ -28,26 +80,17 @@ function chispaSVG(mood = 'normal', size = 90) {
   };
   const m = moods[mood] || moods.normal;
   return `<svg class="chispa-svg" width="${size}" height="${size}" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-  <!-- Shadow -->
   <ellipse cx="50" cy="115" rx="22" ry="5" fill="rgba(0,0,0,.1)"/>
-  <!-- Body -->
   <ellipse cx="50" cy="52" rx="36" ry="38" fill="${m.color1}"/>
   <ellipse cx="50" cy="50" rx="34" ry="36" fill="${m.color2}" opacity=".3"/>
-  <!-- Shine -->
   <ellipse cx="36" cy="30" rx="8" ry="5" fill="rgba(255,255,255,.5)" transform="rotate(-20,36,30)"/>
-  <!-- Arms -->
   <path d="M14,60 Q6,72 14,82" stroke="${m.color1}" stroke-width="7" fill="none" stroke-linecap="round"/>
   <path d="M86,60 Q94,72 86,82" stroke="${m.color1}" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <!-- Eyes -->
   <path d="${m.eyes}" stroke="#2D3436" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <!-- Brows -->
   ${m.brow ? `<path d="${m.brow}" stroke="#2D3436" stroke-width="3" fill="none" stroke-linecap="round"/>` : ''}
-  <!-- Cheeks -->
   <ellipse cx="27" cy="55" rx="8" ry="5" fill="#FF8B94" opacity=".5"/>
   <ellipse cx="73" cy="55" rx="8" ry="5" fill="#FF8B94" opacity=".5"/>
-  <!-- Mouth -->
   <path d="${m.mouth}" stroke="#2D3436" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-  <!-- Lightning bolt -->
   <text x="44" y="98" font-size="16" fill="#6C63FF" font-weight="900">⚡</text>
 </svg>`;
 }
@@ -85,6 +128,53 @@ function updateChispa(containerId, mood, msg) {
   </div>`;
 }
 
+// ===== CONFETTI BURST =====
+function spawnConfetti(x, y) {
+  const colors = ['#FF6B6B','#FFE66D','#4ECDC4','#6C63FF','#FF8B94','#A8E6CF'];
+  const container = document.body;
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-particle';
+    p.style.cssText = `
+      position:fixed; width:10px; height:10px; border-radius:${Math.random()>0.5?'50%':'2px'};
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${x}px; top:${y}px; pointer-events:none; z-index:9999;
+      animation: confetti-fly 1s ease-out forwards;
+      --dx:${(Math.random()-0.5)*200}px;
+      --dy:${-(Math.random()*180+60)}px;
+      --rot:${Math.random()*720}deg;
+    `;
+    container.appendChild(p);
+    setTimeout(() => p.remove(), 1100);
+  }
+}
+
+function spawnConfettiBurst() {
+  const w = window.innerWidth, h = window.innerHeight;
+  [w*0.25, w*0.5, w*0.75].forEach((x,i) => {
+    setTimeout(() => spawnConfetti(x, h*0.4), i*120);
+  });
+}
+
+// ===== FLOATING SCORE POPUP =====
+function showScorePopup(text, color = '#6C63FF') {
+  const el = document.createElement('div');
+  el.className = 'score-popup';
+  el.textContent = text;
+  el.style.cssText = `color:${color};`;
+  document.body.appendChild(el);
+  const pill = document.getElementById('score-pill');
+  if (pill) {
+    const r = pill.getBoundingClientRect();
+    el.style.left = r.left + 'px';
+    el.style.top  = r.top  + 'px';
+  } else {
+    el.style.right = '40px';
+    el.style.top = '80px';
+  }
+  setTimeout(() => el.remove(), 1000);
+}
+
 // ===== QUESTION ENGINE =====
 class QuizEngine {
   constructor(questions, moduleId, colorClass, rootPath) {
@@ -93,12 +183,11 @@ class QuizEngine {
     this.colorClass = colorClass;
     this.rootPath = rootPath || '../..';
     this.current = 0;
-    this.answers = new Array(questions.length).fill(null); // null=unanswered, true=correct, false=wrong
+    this.answers = new Array(questions.length).fill(null);
     this.score = 0;
     this.done = false;
   }
 
-  // Build entire UI into #quiz-container
   render() {
     this.renderProgress();
     this.renderQuestion();
@@ -128,7 +217,7 @@ class QuizEngine {
     const container = document.getElementById('question-area');
     if (!container) return;
 
-    let html = `<div class="question-card">${q.q}</div>`;
+    let html = `<div class="question-card question-animate">${q.q}</div>`;
 
     if (q.type === 'choice' || !q.type) {
       html += `<div class="options-grid">`;
@@ -136,10 +225,9 @@ class QuizEngine {
       q.opts.forEach((opt, i) => {
         let cls = 'option-btn';
         if (answered) {
-          cls += ' ';
-          if (i === q.ans) cls += 'correct';
-          else if (this.answers[this.current] === false && i === q.selected) cls += 'wrong';
-          else cls += 'disabled';
+          if (i === q.ans) cls += ' correct';
+          else if (this.answers[this.current] === false && i === q.selected) cls += ' wrong';
+          else cls += ' disabled';
         }
         html += `<button class="${cls}" data-letter="${letters[i]}" ${answered ? 'disabled' : ''} onclick="quiz.answer(${i})">${opt}</button>`;
       });
@@ -151,7 +239,6 @@ class QuizEngine {
       if (!answered) html += `<button class="btn btn-secondary" onclick="quiz.answerInput()">✓ Verificar</button>`;
     }
 
-    // Explanation
     if (answered) {
       const ok = this.answers[this.current] === true;
       html += `<div class="explanation-box show ${ok ? 'success' : 'error'}">
@@ -177,20 +264,33 @@ class QuizEngine {
         <button class="btn btn-ghost" onclick="quiz.goTo(${this.current - 1})" ${this.current === 0 ? 'disabled' : ''}>← Anterior</button>
         ${answered && !allDone ? `<button class="btn btn-secondary" onclick="quiz.next()">Siguiente →</button>` : ''}
         ${allDone && !this.done ? `<button class="btn btn-primary" onclick="quiz.showResults()">Ver resultados 🏆</button>` : ''}
-        ${answered && this.answers[this.current] === false ? `<button class="btn btn-retry" onclick="quiz.retry()">🔄 Reintentar esta pregunta</button>` : ''}
+        ${answered && this.answers[this.current] === false ? `<button class="btn btn-retry" onclick="quiz.retry()">🔄 Reintentar</button>` : ''}
         <button class="btn btn-ghost" onclick="quiz.goTo(${this.current + 1})" ${this.current >= total - 1 ? 'disabled' : ''}>Siguiente →</button>
       </div>`;
   }
 
   answer(optIndex) {
     if (this.answers[this.current] !== null) return;
+    SFX.select();
     const q = this.questions[this.current];
     q.selected = optIndex;
     const correct = optIndex === q.ans;
     this.answers[this.current] = correct;
-    if (correct) this.score++;
+    if (correct) {
+      this.score++;
+      setTimeout(() => { SFX.correct(); }, 80);
+      const btn = document.querySelectorAll('.option-btn')[optIndex];
+      if (btn) {
+        const r = btn.getBoundingClientRect();
+        spawnConfetti(r.left + r.width/2, r.top + r.height/2);
+      }
+      showScorePopup('+10 ⭐', '#00B894');
+    } else {
+      setTimeout(() => SFX.wrong(), 80);
+    }
     this.render();
     updateChispa('chispa-container', correct ? 'happy' : 'sad', correct ? chispaMsg('correct') : chispaMsg('wrong'));
+    updateScoreDisplay();
   }
 
   answerInput() {
@@ -201,29 +301,42 @@ class QuizEngine {
     const correct = Array.isArray(q.ans) ? q.ans.some(a => a.toLowerCase() === val) : val === q.ans.toLowerCase();
     q.userAnswer = inp.value;
     this.answers[this.current] = correct;
-    if (correct) this.score++;
+    if (correct) {
+      this.score++;
+      SFX.correct();
+      spawnConfetti(window.innerWidth/2, window.innerHeight/2);
+      showScorePopup('+10 ⭐', '#00B894');
+    } else {
+      SFX.wrong();
+    }
     this.render();
     updateChispa('chispa-container', correct ? 'happy' : 'sad', correct ? chispaMsg('correct') : chispaMsg('wrong'));
+    updateScoreDisplay();
   }
 
   retry() {
     this.answers[this.current] = null;
     this.questions[this.current].selected = undefined;
     this.questions[this.current].userAnswer = undefined;
-    if (this.answers[this.current] === false) this.score = Math.max(0, this.score - 1);
+    SFX.click();
     this.render();
     updateChispa('chispa-container', 'think', '¡Inténtalo de nuevo! Puedes hacerlo 💪');
   }
 
   goTo(i) {
     if (i < 0 || i >= this.questions.length) return;
+    SFX.click();
     this.current = i;
     this.render();
     updateChispa('chispa-container', 'normal', chispaMsg('start'));
   }
 
   next() {
-    if (this.current < this.questions.length - 1) { this.current++; this.render(); }
+    if (this.current < this.questions.length - 1) {
+      SFX.click();
+      this.current++;
+      this.render();
+    }
   }
 
   showResults() {
@@ -232,6 +345,13 @@ class QuizEngine {
     const pct = this.score / total;
     const stars = pct >= 0.9 ? 3 : pct >= 0.6 ? 2 : pct >= 0.3 ? 1 : 0;
     OVA.saveProgress(this.moduleId, stars);
+
+    if (pct >= 0.7) {
+      SFX.complete();
+      spawnConfettiBurst();
+    } else {
+      SFX.wrong();
+    }
 
     const mood = pct >= 0.7 ? 'cheer' : pct >= 0.4 ? 'normal' : 'sad';
     const msg = pct >= 0.9 ? chispaMsg('finish') : pct >= 0.6 ? chispaMsg('almost') : '¡Sigue practicando! 💪';
@@ -254,7 +374,7 @@ class QuizEngine {
     const btnColor = this.colorClass || 'btn-primary';
 
     document.getElementById('results-panel').innerHTML = `
-      <div class="confetti-burst">${pct >= 0.7 ? '🎉' : '💫'}</div>
+      <div class="confetti-burst">${pct >= 0.7 ? '🎉🎊🌟' : '💫'}</div>
       <div class="results-score">${this.score}/${total}</div>
       <div class="results-label">${pct >= 0.9 ? '¡Perfecto! Eres un genio 🏆' : pct >= 0.6 ? '¡Muy bien hecho! 🌟' : '¡Sigue practicando! 💪'}</div>
       <div class="stars-row">${starsHtml}</div>
@@ -273,6 +393,7 @@ class QuizEngine {
     this.score = 0;
     this.done = false;
     this.current = 0;
+    SFX.click();
     document.getElementById('results-panel').classList.remove('show');
     this.render();
     updateChispa('chispa-container', 'think', '¡Empecemos de nuevo! Tú puedes 💪');
@@ -294,4 +415,17 @@ function updateScoreDisplay() {
 
 document.addEventListener('DOMContentLoaded', () => {
   updateScoreDisplay();
+
+  // Animate cards on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('card-visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.module-card').forEach(c => observer.observe(c));
+
+  // Sound on nav links/tabs
+  document.querySelectorAll('.subject-tab, .nav-links a').forEach(el => {
+    el.addEventListener('click', () => SFX.tab());
+  });
 });
